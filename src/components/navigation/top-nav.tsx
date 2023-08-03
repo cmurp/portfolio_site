@@ -1,7 +1,7 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components';
 
-import Logo from '../../branding/logo';
+import Logo from '../branding/logo';
 import { useSideNavStateContext } from './context/side-nav-state';
 import { BiMenuAltLeft } from 'react-icons/bi';
 import { BiCog } from 'react-icons/bi';

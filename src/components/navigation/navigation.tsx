@@ -5,8 +5,8 @@ import { OrientationContext } from './context/orientation';
 import { SideNavStateContext } from "./context/side-nav-state";
 import SideNav from "./side-nav";
 import TopNav from "./top-nav";
-import { useOrientation } from '../../../hooks/useOrientation';
-import { useClickOutside } from '../../../hooks/useClickOutside';
+import { useOrientation } from '../../hooks/useOrientation';
+import { useClickOutside } from '../../hooks/useClickOutside';
 
 //placeholders
 interface NavigationProps {
@@ -17,6 +17,12 @@ interface NavigationProps {
 const NavContainer = styled.div`
   position: relative;
 `;
+
+const links = [
+    { text: 'Home', href: '/' },
+    { text: 'About', href: '/about' },
+    { text: 'Contact', href: '/contact' },
+];  
 
 const Navigation: React.FC<NavigationProps> = ({ logo, icon }) => {
     const {isVertical, setIsVertical} = useOrientation();

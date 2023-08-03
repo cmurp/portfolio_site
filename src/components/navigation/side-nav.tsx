@@ -1,10 +1,10 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components';
 
-import Logo from '../../branding/logo';
+import Logo from '../branding/logo';
 import { useOrientationContext } from './context/orientation';
 import { useSideNavStateContext } from './context/side-nav-state';
-import { useButtonClickedContext } from './context/buttonClicked';
+import { useButtonClickedContext } from '../blog/context/buttonClicked';
 
 import { BiChevronRight, BiChevronLeft } from 'react-icons/bi';
 import { FaUserAstronaut } from 'react-icons/fa';

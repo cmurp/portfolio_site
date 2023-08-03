@@ -1,11 +1,11 @@
 import React, { useEffect } from "react";
 import styled, { useTheme } from "styled-components";
 
-import { useButtonClickedContext } from "../navigation/context/buttonClicked";
-import { TypingEffect } from "../../text/typing-effect";
-import Text from "../../text/text";
+import { useButtonClickedContext } from "./context/buttonClicked";
+import { TypingEffect } from "../text/typing-effect";
+import Text from "../text/text";
 
-import { LIPSUM } from "../../../constants";
+import { LIPSUM } from "../../constants";
 
 interface Props {
   children: React.ReactNode;
@@ -32,7 +32,6 @@ const Content: React.FC<Props> = ({ children }) => {
     <ContentContainer theme={theme}>
       {!isClicked && <Text>Click it.</Text>}
       <TypingEffect text={LIPSUM} isClicked={isClicked} speed={10} />
-
     </ContentContainer>
   );
 };
