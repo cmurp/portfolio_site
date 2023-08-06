@@ -23,7 +23,6 @@ const ContentContainer = styled.div<ContainerProps>`
   color: ${(props: ContainerProps) => props.theme.colors.textPrimary};
 `;
 
-
 const Content: React.FC<Props> = ({ children }) => {
   const { isClicked, setIsClicked } = useButtonClickedContext();
   const theme = useTheme();

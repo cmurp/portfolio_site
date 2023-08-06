@@ -1,5 +1,6 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 import Logo from '../branding/logo';
 import { useOrientationContext } from './context/orientation';
@@ -25,7 +26,7 @@ const renderLinks = (links: Link[]) => {
     <NavItemsContainer>
       <NavItems>
       {links.map((link) => (
-        <NavItem key={link.text} href={link.href}>
+        <NavItem key={link.text} to={link.href}>
           {link.text}
         </NavItem>
       ))}
@@ -86,9 +87,9 @@ const SideNav: React.FC<Props> = ({ links = [] }) => {
 
 SideNav.defaultProps = {
     links: [
-        {text:"Home", href:""},
-        {text:"About", href:""},
-        {text:"Contact", href:""},
+        {text:"Home", href:"/"},
+        {text:"About", href:"/about"},
+        {text:"Contact", href:"/contact"},
     ]
   };
 
@@ -159,7 +160,7 @@ const NavItems = styled.ul`
   margin: 0;
 `;
 
-const NavItem = styled.a`
+const NavItem = styled(Link)`
   display: block;
   padding: 10px;
   text-decoration: none;

@@ -5,12 +5,13 @@ import Content from './content';
 import { ButtonClickedContext } from './context/buttonClicked';
 
 interface Props {
-  children: React.ReactNode;
+  children?: React.ReactNode;
   isVertical?: boolean;
 }
 
 const Blog: React.FC<Props> = ({ children }) => {
   const [isClicked, setIsClicked] = React.useState<boolean>(false);
+
   const clickToRender = useEffect(() => {
         window.addEventListener('keydown', (key) => {
           if (key.key === 'Enter')

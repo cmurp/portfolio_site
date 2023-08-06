@@ -1,39 +1,73 @@
-import './App.css';
+import {
+  createBrowserRouter,
+  RouterProvider,
+  Outlet
+} from "react-router-dom";
 import styled, { ThemeProvider } from 'styled-components';
-import Layout from './components/blog/blog';
-import { GlobalStyle } from './GlobalStyle';
-import theme from './theme';
 
-import { useOrientation } from './hooks/useOrientation';
+
+import ErrorPage from './error-page';
+import Contact from "./components/contact";
+import About from "./components/about";
 import Navigation from './components/navigation/navigation';
+import { useOrientation } from './hooks/useOrientation';
 import Blog from './components/blog/blog';
 
-interface Props {
-  children: React.ReactNode;
-  isVertical?: boolean;
-}
+import { GlobalStyle } from './GlobalStyle';
+import theme from './theme';
+import './App.css';
 
-const LayoutContainer = styled.div<Props>`
-  display: flex;
-  flex-direction: ${({ isVertical }: Props) => (isVertical ? 'column':'row')};
-  height: 100vh;
-  overflow: hidden;
-`;
-
-function App() {
-  const {isVertical, setIsVertical} = useOrientation();
-
+const Layout = () => {
+  interface ContainerProps {
+    isVertical?: boolean;
+  }
+    
+  const Container = styled.div<ContainerProps>`
+    display: flex;
+    flex-direction: ${({ isVertical }: ContainerProps) => (isVertical ? 'column':'row')};
+    height: 100vh;
+    overflow: hidden;
+  `;
+  const {isVertical,} = useOrientation();
   return (
     <>
-      <ThemeProvider theme={theme}>
-        <GlobalStyle />
-        <LayoutContainer isVertical={isVertical}>
+        <Container isVertical={isVertical}>
           <Navigation />
-          <Blog>TEST</Blog>
-        </LayoutContainer>
-      </ThemeProvider>
+          <Outlet />
+        </Container>
     </>
   );
+}
+
+const router = createBrowserRouter([
+  {
+    path: "/",
+    element: <Layout />,
+    errorElement: <ErrorPage />,
+    children: [
+      {
+        path: "blog",
+        element: <Blog />,
+      },
+      {
+        path: "about",
+        element: <About />,
+      },
+      {
+        path: "contact",
+        element: <Contact />,
+      },
+    ],
+  },
+]);
+
+function App() {
+  return (
+    <ThemeProvider theme={theme}>
+      <GlobalStyle />
+      <RouterProvider router={router} />
+    </ThemeProvider>  
+  )
 }
 
 export default App;
