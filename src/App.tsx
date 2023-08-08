@@ -12,6 +12,7 @@ import About from "./components/about";
 import Navigation from './components/navigation/navigation';
 import { useOrientation } from './hooks/useOrientation';
 import Blog from './components/blog/blog';
+import Landing from './components/landing';
 
 import { GlobalStyle } from './GlobalStyle';
 import theme from './theme';
@@ -45,6 +46,10 @@ const router = createBrowserRouter([
     element: <Layout />,
     errorElement: <ErrorPage />,
     children: [
+      {
+        index: true,
+        element: <Landing />,
+      },
       {
         path: "blog",
         element: <Blog />,
