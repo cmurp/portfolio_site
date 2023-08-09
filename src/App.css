@@ -1,1 +1,36 @@
-
+/* Style for all scrollbar tracks */
+::-webkit-scrollbar-track {
+    border-radius: 10px;
+    background-color: rgba(240, 240, 240, 0.0);
+  }
+  
+  /* Style for all scrollbar thumbs */
+  ::-webkit-scrollbar-thumb {
+    border-radius: 10px;
+    background: rgba(100, 100, 100, 0.5);
+    border: 2px solid transparent;
+    background-clip: content-box; /* So the background color doesn't cover the border */
+  }
+  
+  /* Style for all scrollbar thumbs when hovered */
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(80, 80, 80, 0.7);
+  }
+  
+  /* Style for all scrollbar thumbs when active */
+  ::-webkit-scrollbar-thumb:active {
+    background: rgba(60, 60, 60, 0.9);
+  }
+  
+  /* Style for scrollbar width and height */
+  ::-webkit-scrollbar {
+    width: 8px; /* Vertical scrollbars */
+    height: 8px; /* Horizontal scrollbars */
+  }
+  
+  /* Style for Firefox */
+  * {
+    scrollbar-color: rgba(100, 100, 100, 0.5) rgba(240, 240, 240, 0.8);
+    scrollbar-width: thin;
+  }
+  
