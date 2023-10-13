@@ -23,6 +23,8 @@ const CanvasBackground = () => {
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
+    canvas.width = dimensions.width;
+    canvas.height = dimensions.height;
     //Our first draw
     context.fillStyle = '#000000'
     context.fillRect(0, 0, context.canvas.width, context.canvas.height);
@@ -110,7 +112,6 @@ const CanvasBackground = () => {
         const b = 1 - d * d;
 
         putPixel(x, y, b);
-        
       }
 
       requestAnimationFrame(tick);
