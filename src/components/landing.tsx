@@ -1,87 +1,84 @@
-import React from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
+import styled, { keyframes } from 'styled-components';
 
-// Styled components
-const LandingContainer = styled.div`
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  padding: 2rem;
-  background: ${({ theme }) => theme.colors.main};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    flex-direction: column;
-    background: url('image.png') center/cover no-repeat;
+const rippleAnimation = keyframes`
+  0% {
+    text-shadow: 0 0 0.5em #FF0000, 0 0 0.5em #FF0000, 0 0 0.5em #FF0000;
+  }
+  50% {
+    text-shadow: 0 0 0.2em #FF0000, 0 0 0.2em #FF0000, 0 0 0.5em #FF0000;
+  }
+  100% {
+    text-shadow: 0 0 0.5em #FF0000, 0 0 0.5em #FF0000, 0 0 0.5em #FF0000;
   }
 `;
 
-const TextContainer = styled.div`
-  flex: 1;
-  padding: 2rem;
-  color: ${({ theme }) => theme.colors.textPrimary};
-  font-family: ${({ theme }) => theme.fonts.primary};
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    background: rgba(255, 255, 255, 0.8);
+const liquid = keyframes`
+  0%, 100% {
+    text-shadow: 3px 0px 2px #000, -3px 0px 2px #000, 0px 3px 2px #000, 0px -3px 2px #000;
+  }
+  50% {
+    text-shadow: 3px 3px 2px #000, -3px -3px 2px #000, -3px 3px 2px #000, 3px -3px 2px #000;
   }
 `;
 
-const LandingTitle = styled.h1`
-  font-size: ${({ theme }) => theme.fontSizes.xxl};
-  font-weight: ${({ theme }) => theme.fontWeights.bolder};
-`;
-
-const LandingDescription = styled.p`
-  font-size: ${({ theme }) => theme.fontSizes.lg};
-  font-weight: ${({ theme }) => theme.fontWeights.normal};
-`;
-
-const CTAButton = styled.button`
-  background: ${({ theme }) => theme.colors.accent};
-  color: ${({ theme }) => theme.colors.textOnAccent};
-  border: none;
-  border-radius: ${({ theme }) => theme.borderRadius};
-  padding: 1rem 2rem;
-  font-size: ${({ theme }) => theme.fontSizes.md};
-  font-weight: ${({ theme }) => theme.fontWeights.bold};
-  cursor: pointer;
-  transition: background-color ${({ theme }) => theme.animations.transitionTime};
-
-  &:hover {
-    background: ${({ theme }) => theme.colors.secondaryAccent};
-    color: ${({ theme }) => theme.colors.textOnSecondaryAccent};
+const moveBackground = keyframes`
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 100% 0;
   }
 `;
 
-const ImageContainer = styled.div`
-  flex: 1;
+const MainText = styled.h1`
+  font-size: 3em;
+  text-shadow: 0px 1px 0px #fff, 0px 2px 0px #fff, 0px 3px 0px #ccc, 0px 4px 0px #ccc, 0px 5px 0px #aaa, 0px 6px 1px rgba(0,0,0,.1), 0px 0px 5px rgba(0,0,0,.1), 0px 1px 3px rgba(0,0,0,.3), 0px 3px 5px rgba(0,0,0,.2), 0px 5px 10px rgba(0,0,0,.25), 0px 10px 10px rgba(0,0,0,.2), 0px 20px 20px rgba(0,0,0,.15);
+  position: relative;
+  background-clip: text;
+  background-color: blue;
+  color: transparent;
+  -webkit-background-clip: text;
+  transition: opacity 2s ease;
+  animation: move-background 5s infinite linear;
+`;
+
+const TagLine = styled.span`
+  font-size: 1.5em;
+  color: grey;
+  &::after {
+    content: "";
+    display: block;
+    margin: auto;
+    height: 2px;
+    background: linear-gradient(to right, transparent, grey, transparent);
+    width: 50%;
+  }
+`;
+
+const Container = styled.div`
+  height: 100vh;
   display: flex;
   align-items: center;
   justify-content: center;
-
-  @media (max-width: ${({ theme }) => theme.breakpoints.tablet}) {
-    display: none;
-  }
-`;
-
-const StyledImage = styled.img`
-  max-width: 100%;
-  height: auto;
-  box-shadow: ${({ theme }) => theme.shadows.md};
+  flex-flow: column nowrap;
 `;
 
 const Landing: React.FC = () => {
+  useEffect(() => {
+    const text = document.querySelector('.main-text');
+    if (text) {
+      text.classList.add('animate-text');
+    }
+  }, []);
+
   return (
-    <LandingContainer>
-      <TextContainer>
-        <LandingTitle>Hi, I'm Chris Murphy</LandingTitle>
-        <LandingDescription>Welcome to my site</LandingDescription>
-        <CTAButton>View my works</CTAButton>
-      </TextContainer>
-      <ImageContainer>
-        <StyledImage src="image.png" alt="Colorful Illustration" />
-      </ImageContainer>
-    </LandingContainer>
+    <Container>
+      <MainText>Chris Murphy</MainText>
+      <TagLine>
+        Web Developer & Software Engineer
+      </TagLine>
+    </Container>
   );
 };
 

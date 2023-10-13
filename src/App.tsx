@@ -1,76 +1,96 @@
+import { useState } from "react";
 import {
   createBrowserRouter,
-  RouterProvider,
-  Outlet
+  Outlet,
+  RouterProvider
 } from "react-router-dom";
-import styled, { ThemeProvider } from 'styled-components';
-
-
-import ErrorPage from './error-page';
-import Contact from "./components/contact";
-import About from "./components/about";
-import Navigation from './components/navigation/navigation';
-import { useOrientation } from './hooks/useOrientation';
-import Blog from './components/blog/blog';
-import Landing from './components/landing';
+import { styled, ThemeProvider } from 'styled-components';
 
 import { GlobalStyle } from './GlobalStyle';
 import theme from './theme';
 import './App.css';
 
-const Layout = () => {
-  interface ContainerProps {
-    isVertical?: boolean;
-  }
-    
-  const Container = styled.div<ContainerProps>`
-    display: flex;
-    flex-direction: ${({ isVertical }: ContainerProps) => (isVertical ? 'column':'row')};
+import ErrorPage from './error-page';
+import Contact from "./components/contact";
+import About from "./components/about";
+import Blog from './components/blog/blog';
+import Landing from './components/landing';
+import { NavigationActivatedContext } from "./context/NavigationActivatedContext";
+import Layout from "./Layout";
+import CanvasBackground from "./components/CanvasBackground.styled";
+
+const AppContainer = () => {
+  const Container = styled.div`
+    position: fixed;
     height: 100vh;
-    overflow: hidden;
+    width: 100vw;
   `;
-  const {isVertical,} = useOrientation();
+
   return (
     <>
-        <Container isVertical={isVertical}>
-          <Navigation />
+      <CanvasBackground />
+      <Container>
           <Outlet />
-        </Container>
+      </Container>
     </>
   );
 }
 
+/** Landing page will have it's own navigation, 
+  * everything else will use the Layout component with standard navigation.
+  */
 const router = createBrowserRouter([
   {
-    path: "/",
-    element: <Layout />,
+    element: <AppContainer />,
     errorElement: <ErrorPage />,
     children: [
       {
-        index: true,
-        element: <Landing />,
+        path: "/",
+        element: <Landing />
       },
       {
         path: "blog",
-        element: <Blog />,
+        element: <Layout />,
+        children: [
+          {
+            index: true,
+            element: <Blog />,
+          }
+        ]
       },
       {
         path: "about",
-        element: <About />,
+        element: <Layout />,
+        children: [
+          {
+            index: true,
+            element: <About />,
+          }
+        ]
       },
       {
         path: "contact",
-        element: <Contact />,
-      },
-    ],
-  },
+        element: <Layout />,
+        children: [
+          {
+            index: true,
+            element: <Contact />,
+          }
+        ]
+     }
+    ]
+  }
 ]);
 
 function App() {
+  const [ navActivated, setNavActivated ] = useState<boolean>(false);
+
   return (
     <ThemeProvider theme={theme}>
+      <NavigationActivatedContext.Provider value={{navActivated, setNavActivated}}>
       <GlobalStyle />
       <RouterProvider router={router} />
+      </NavigationActivatedContext.Provider>
     </ThemeProvider>  
   )
 }

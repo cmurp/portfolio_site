@@ -2,7 +2,6 @@ import { createGlobalStyle } from 'styled-components';
 
 export const GlobalStyle = createGlobalStyle`
     body {
-        background-color: ${({ theme }) => theme.colors.main};
         color: ${({ theme }) => theme.colors.textPrimary};
         font-family: ${({ theme }) => theme.fonts.primary};
         font-size: ${({ theme }) => theme.fontSizes.md};
