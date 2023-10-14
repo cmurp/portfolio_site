@@ -1,5 +1,6 @@
 import React, { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
+import { Link } from 'react-router-dom';
 
 const rippleAnimation = keyframes`
   0% {
@@ -57,7 +58,7 @@ const TagLine = styled.span`
   }
 `;
 
-const NavButton = styled.button`
+const NavButton = styled(Link)`
   background-color: transparent;
   border: 1px solid white;
   border-radius: 5px;
@@ -67,6 +68,7 @@ const NavButton = styled.button`
   margin-top: 1em;
   cursor: pointer;
   transition: all 0.5s ease;
+  text-decoration: none;
   &:hover {
     background-color: white;
     color: black;
@@ -95,9 +97,9 @@ const Landing: React.FC = () => {
       <TagLine>
         Full Stack Software Engineer
       </TagLine>
-      <NavButton>About Me</NavButton>
-      <NavButton>View My Work</NavButton>
-      <NavButton>Contact Me</NavButton>
+      <NavButton key="About Me" to="about">About Me</NavButton>
+      <NavButton key="View My Work" to="http://github.com/cmurp">View My Work</NavButton>
+      <NavButton key="Contact Me" to="contact">Contact Me</NavButton>
     </Container>
   );
 };
