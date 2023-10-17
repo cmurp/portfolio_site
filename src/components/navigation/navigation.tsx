@@ -1,4 +1,4 @@
-import React, { Ref } from 'react';
+import React, { Ref, useState } from 'react';
 import styled from 'styled-components';
 
 import { OrientationContext } from './context/orientation';
@@ -7,6 +7,8 @@ import SideNav from "./side-nav";
 import TopNav from "./top-nav";
 import { useOrientation } from '../../hooks/useOrientation';
 import { useClickOutside } from '../../hooks/useClickOutside';
+
+import { useNavigationActivatedContext } from "../../context/NavigationActivatedContext";
 
 //placeholders
 interface NavigationProps {
@@ -27,6 +29,14 @@ const links = [
 const Navigation: React.FC<NavigationProps> = ({ logo, icon }) => {
     const {isVertical, setIsVertical} = useOrientation();
     const { isOpen, setIsOpen, containerRef } = useClickOutside(!isVertical, isVertical);
+    const { navActivated } = useNavigationActivatedContext();
+
+    React.useEffect(() => {
+        if (navActivated) {
+            setIsVertical(false);
+        }
+    }, [navActivated]);
+
 
     return (
         <OrientationContext.Provider value={{ isVertical, setIsVertical }}>

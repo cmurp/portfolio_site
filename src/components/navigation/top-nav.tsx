@@ -1,23 +1,24 @@
-import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import styled, { useTheme } from 'styled-components';
-
-import Logo from '../branding/logo';
-import { useSideNavStateContext } from './context/side-nav-state';
 import { BiMenuAltLeft } from 'react-icons/bi';
 import { BiCog } from 'react-icons/bi';
 
+import Logo from '../branding/logo';
+import { useSideNavStateContext } from './context/side-nav-state';
+import { ContentRefContext, useContentRefContext } from '../../context/ContentRefContext';
+
 interface TopNavigationProps {
-  logo?: string;
-  icon?: string;
   theme?: any;
+  visible?: boolean;
 }
 
 const Navigation = styled.nav<TopNavigationProps>`
-  position: absolute;
+  position: fixed;
   top: 0;
   left: 0;
   width: 100%;
   height: 2rem;
+  top: ${(props) => (props.visible ? '0' : '-2rem')};
   background-color: ${(props: TopNavigationProps) => props.theme.colors.secondary};
   color: ${(props: TopNavigationProps) => props.theme.colors.textSecondary};
   display: flex;
@@ -25,6 +26,10 @@ const Navigation = styled.nav<TopNavigationProps>`
   justify-content: space-between;
   padding: 0 20px;
   z-index: 999;
+  transition: top 0.3s;
+  &.hidden {
+    top: -20rem;
+  }
 `;
 
 const Icon = styled.div`
@@ -39,23 +44,41 @@ const Hamburger = styled.button`
   cursor: pointer;
 `;
 
-const TopNav: React.FC<TopNavigationProps> = ({ logo, icon }) => {
+const TopNav = () => {
   const { isOpen, setIsOpen } = useSideNavStateContext();
+  const [visible, setVisible] = useState(true);
+  const [prevScrollPos, setPrevScrollPos] = useState(0);
+  const [lastScrollPos, setLastScrollPos] = useState(0);
   const theme = useTheme();
+  const containerRef = useContentRefContext();
 
-  const handleScroll = () => {
-    const navigation = document.getElementById('top-nav');
-    if (navigation && window.pageYOffset > 0) {
-      navigation.classList.add('fixed');
-    } else if (navigation) {
-      navigation.classList.remove('fixed');
+  useEffect(() => {
+    const handleScroll = () => {
+      const currentScrollPos = containerRef.current?.scrollTop ?? 0;
+      var visible = false;
+      if (currentScrollPos > prevScrollPos) { // scrolling down
+        setLastScrollPos(currentScrollPos);
+      }
+      else if (currentScrollPos + 5 < lastScrollPos) {
+        visible = true;
+      }
+
+      setPrevScrollPos(currentScrollPos);
+      setVisible(visible);
+    };
+
+    const container = containerRef.current;
+
+    if (container) {
+      container.addEventListener('scroll', handleScroll);
     }
-  };
-
-  React.useEffect(() => {
-    window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
-  }, []);
+  
+    return () => {
+      if (container) {
+        container.removeEventListener('scroll', handleScroll);
+      }
+    };
+  }, [prevScrollPos, lastScrollPos, containerRef]);
 
   const handleToggle = () => {
     setIsOpen(!isOpen);
@@ -63,18 +86,13 @@ const TopNav: React.FC<TopNavigationProps> = ({ logo, icon }) => {
 
 
   return (
-    <Navigation id="top-nav" theme={theme}>
+    <Navigation ref={containerRef} id="top-nav" theme={theme} visible={visible}>
       <Hamburger onClick={handleToggle}><BiMenuAltLeft/></Hamburger>
-      {logo && <Logo alt="logo"></Logo>}
-      {icon && <Icon><BiCog/></Icon>}
+      <Logo alt="logo"></Logo>
+      <Icon><BiCog/></Icon>
 
     </Navigation>
   );
-};
-
-TopNav.defaultProps = {
-    logo: 'Logo',
-    icon: 'Icon',
 };
 
 export default TopNav;

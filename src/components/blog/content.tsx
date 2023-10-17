@@ -18,8 +18,6 @@ interface ContainerProps {
 const ContentContainer = styled.div<ContainerProps>`
   flex: 1;
   padding: 2rem;
-  overflow-y: scroll;
-  background-color: ${(props: ContainerProps) => props.theme.colors.main};
   color: ${(props: ContainerProps) => props.theme.colors.textPrimary};
 `;
 

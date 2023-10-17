@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 import Logo from '../branding/logo';
 import { useOrientationContext } from './context/orientation';
 import { useSideNavStateContext } from './context/side-nav-state';
-import { useButtonClickedContext } from '../blog/context/buttonClicked';
 
 import { BiChevronRight, BiChevronLeft } from 'react-icons/bi';
 import { FaUserAstronaut } from 'react-icons/fa';
@@ -38,16 +37,6 @@ const renderLinks = (links: Link[]) => {
 const SideNav: React.FC<Props> = ({ links = [] }) => {
   const { isVertical } = useOrientationContext();
   const { isOpen, setIsOpen } = useSideNavStateContext();
-  const { isClicked, setIsClicked } = useButtonClickedContext();
-  const theme = useTheme();
-
-  const openForHorizontal = () => {
-    if (!isVertical) {
-      setIsOpen(true);
-    } else {
-      setIsOpen(false);
-    }
-  };
   
   React.useEffect(() => {
     openForHorizontal();
@@ -57,9 +46,12 @@ const SideNav: React.FC<Props> = ({ links = [] }) => {
     openForHorizontal();
   }, [isVertical]);
 
-  const handleClicked = () => {
-    setIsClicked(true);
-    setIsOpen(false);
+  const openForHorizontal = () => {
+    if (!isVertical) {
+      setIsOpen(true);
+    } else {
+      setIsOpen(false);
+    }
   };
   
   return (
@@ -70,13 +62,12 @@ const SideNav: React.FC<Props> = ({ links = [] }) => {
             <Logo alt="logo" />
           </LogoContainer>
       
-          <HalfCircleButton onClick={() => {setIsOpen(!isOpen)}}>
+          <NavButton onClick={() => {setIsOpen(!isOpen)}}>
             {isOpen ? <BiChevronLeft/> : <BiChevronRight/>}
-          </HalfCircleButton>
+          </NavButton>
         </>
       )}
       {links && links.length > 0 && renderLinks(links)}
-      <ActivateButton onClick={handleClicked}>ACTIVATE</ActivateButton>
       <LogoContainer>
         <FaUserAstronaut />
         <BiCog />
@@ -86,12 +77,12 @@ const SideNav: React.FC<Props> = ({ links = [] }) => {
 };
 
 SideNav.defaultProps = {
-    links: [
-        {text:"Home", href:"/"},
-        {text:"About", href:"/about"},
-        {text:"Contact", href:"/contact"},
-    ]
-  };
+  links: [
+    {text:"Home", href:"/"},
+    {text:"About", href:"/about"},
+    {text:"Contact", href:"/contact"},
+  ]
+};
 
 interface ThemedProps {
   theme: any;
@@ -105,13 +96,14 @@ const NavContainer = styled.nav<ThemedProps>`
     left: 0;
     z-index: 999;
   }
+  --nav-width: 10rem;
 
   display: flex;
   flex-direction: column;
   justify-content: space-around;
   
   height: 100vh;
-  width: 7rem;
+  width: var(--nav-width);
   background-color: ${(props: ThemedProps) => props.theme.colors.secondary};
   color: ${(props: ThemedProps) => props.theme.colors.textSecondary};
 
@@ -119,7 +111,7 @@ const NavContainer = styled.nav<ThemedProps>`
 
   /* Additional styles for the hidden state */
   &.hidden {
-    transform: translateX(-7rem); /* Move the container off-screen */
+    transform: translateX(calc(var(--nav-width)*-1)); /* Move the container off-screen */
   }
 `;
 
@@ -133,18 +125,6 @@ const LogoContainer = styled.div`
   height: 3rem;
 `;
 
-// button with heart emoji and pink background
-const ActivateButton = styled.button<Props>`
-  border: none;
-  border-radius: 2%;
-  background-color: ${(props: ThemedProps) => props.theme.colors.accent};
-  color: ${(props: ThemedProps) => props.theme.colors.textSecondary};
-  cursor: pointer;
-  width: 90%;
-  margin: auto;
-  padding: 0 1rem;
-`;
-
 const NavItemsContainer = styled.div`
   flex: 1;
   overflow-y: auto;
@@ -152,6 +132,7 @@ const NavItemsContainer = styled.div`
   display: flex;
   flex-direction: column;
   justify-content: center;
+  align-items: center;
 `;
 
 const NavItems = styled.ul`
@@ -165,27 +146,30 @@ const NavItem = styled(Link)`
   padding: 10px;
   text-decoration: none;
   color: ${(props: ThemedProps) => props.theme.colors.textSecondary};
+  font-size: 1rem;
+  line-height: 1.25rem;
 
   &:hover {
     background-color: ${(props: ThemedProps) => props.theme.colors.main};
   }
 `;
 
-const HalfCircleButton = styled.button`
+const NavButton = styled.button`
   position: absolute;
-  top: .1rem;
+  top: .5rem;
   left: 97%;
-  width: .8rem;
+  width: 1.5rem;
   padding: 0;
   height: 2rem;
-  border-radius: 0 2px 2px 0;
+  border-radius: 0 10px 10px 0;
   background-color: ${(props: ThemedProps) => props.theme.colors.secondary};
   border: none;
   color: ${(props: ThemedProps) => props.theme.colors.textSecondary};
-  font-size: 1rem;
+  font-size: 1.5rem;
+  font-weight: bold;
   cursor: pointer;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
 `;
 
