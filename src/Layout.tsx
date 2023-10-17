@@ -17,7 +17,10 @@ const Layout = () => {
   `;
 
   const Content = styled.div`
+    height: 100%;
+    width: 100%;
     overflow-y: auto;
+    padding: 2rem;
   `;
 
   const {isVertical,} = useOrientation();
