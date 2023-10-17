@@ -4,24 +4,34 @@ const theme: ThemeInterface = {
     borderRadius: '5px',
 
     colors: {
-        main: '#1a202c', // Dark gray - primary background color
-        secondary: '#2d3748', // Medium gray - secondary background color for panels, modals
-        tertiary: '#4a5568', // Light gray - used for backgrounds of selected items, hover states
+        main: '#000000', // Dark blue - primary background color
+        secondary: '#082032', // Medium blue - secondary background color for panels, modals
+        tertiary: '#334756', // Light blue - used for backgrounds of selected items, hover states
 
-        accent: '#E53E3E', // Scarlet - accent color for buttons, links
-        secondaryAccent: '#38B2AC', // Turquoise - secondary accent color for highlights, notifications
+        accent: '#F0A500', // Gold - accent color for buttons, links
+        secondaryAccent: '#FFFFFF', // White - secondary accent color for highlights, notifications
 
         textPrimary: '#F7FAFC', // Almost white - primary text color
         textSecondary: '#E2E8F0', // Light gray - secondary text color for less important information
-        textOnAccent: '#F7FAFC', // Almost white - text color on accent backgrounds
-        textOnSecondaryAccent: '#1a202c', // Dark gray - text color on secondary accent backgrounds
+        textOnAccent: '#0F1624', // Dark blue - text color on accent backgrounds
+        textOnSecondaryAccent: '#0F1624', // Dark blue - text color on secondary accent backgrounds
 
-        border: '#4A5568', // Light gray - border color for dividers, tables, etc
-        borderAccent: '#E53E3E', // Scarlet - border color for emphasis
+        border: '#334756', // Light blue - border color for dividers, tables, etc
+        borderAccent: '#F0A500', // Gold - border color for emphasis
+
+        success: '#007E33', // Green - success color for notifications, alerts
+        warning: '#FF8800', // Orange - warning color for notifications, alerts
+        error: '#CC0000', // Red - error color for notifications, alerts
+        info: '#2196F3', // Blue - info color for notifications, alerts
+
+        background: '#F7FAFC', // Almost white - background color for the page
+        backgroundSecondary: '#E2E8F0', // Light gray - secondary background color for panels, modals
+
+        title: '#F0A500', // Gold - color for titles, headings, etc
     },
 
     fonts: {
-        primary: 'Arial, sans-serif', // Primary font for text
+        primary: 'Poppins, sans-serif', // Primary font for text
         code: 'Courier, monospace', // Font for code blocks, data presentation
     },
 

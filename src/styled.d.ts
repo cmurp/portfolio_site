@@ -19,8 +19,18 @@ declare module 'styled-components' {
         textOnAccent: string;
         textOnSecondaryAccent: string;
         
+        success: string, 
+        warning: string, 
+        error: string, 
+        info: string,
+
+        background: string,
+        backgroundSecondary: string,
+        
         border: string;
         borderAccent: string;
+
+        title: string;
       };
       
       fonts: {
