@@ -14,7 +14,7 @@ const Container = styled.div`
 const BusinessCard = styled.div`
     display: flex;
     flex-direction: column;
-    width: 50%;
+    width: 370px;
     height: 200px;
     align-items: center;
     background: rgba( 255, 255, 255, 0.1 );
@@ -42,7 +42,7 @@ const BoldSpan = styled.span`
 const Tagline = styled.span`
     font-size: 1rem;
     font-style: italic;
-    text-decoration: wavy underline;
+    text-decoration: underline;
     color: ${(props: any) => props.theme.colors.textPrimary};
 `;
 
