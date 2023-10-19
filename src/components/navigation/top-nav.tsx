@@ -17,7 +17,8 @@ const Navigation = styled.nav<TopNavigationProps>`
   top: 0;
   left: 0;
   width: 100%;
-  height: 2rem;
+  height: 3rem;
+  padding: 0 1rem;
   top: ${(props) => (props.visible ? '0' : '-2rem')};
   background-color: ${(props: TopNavigationProps) => props.theme.colors.secondary};
   color: ${(props: TopNavigationProps) => props.theme.colors.textSecondary};
@@ -33,11 +34,11 @@ const Navigation = styled.nav<TopNavigationProps>`
 `;
 
 const Icon = styled.div`
-  font-size: 24px;
+  font-size: 2rem;
 `;
 
 const Hamburger = styled.button`
-  font-size: 1rem;
+  font-size: 1.5rem;
   background: none;
   color: teal;
   border: none;
@@ -89,7 +90,8 @@ const TopNav = () => {
     <Navigation ref={containerRef} id="top-nav" theme={theme} visible={visible}>
       <Hamburger onClick={handleToggle}><BiMenuAltLeft/></Hamburger>
       <Logo alt="logo"></Logo>
-      <Icon><BiCog/></Icon>
+      {/* <Icon><BiCog/></Icon> */}
+      <Icon></Icon>
 
     </Navigation>
   );

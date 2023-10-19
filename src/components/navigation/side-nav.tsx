@@ -69,8 +69,8 @@ const SideNav: React.FC<Props> = ({ links = [] }) => {
       )}
       {links && links.length > 0 && renderLinks(links)}
       <LogoContainer>
-        <FaUserAstronaut />
-        <BiCog />
+        {/* <FaUserAstronaut />
+        <BiCog /> */}
       </LogoContainer>
     </NavContainer>
   );
