@@ -1,6 +1,6 @@
 import React from 'react';
 import styled, { useTheme } from 'styled-components';
-import { Link } from 'react-router-dom';
+import { NavLink } from 'react-router-dom';
 
 import Logo from '../branding/logo';
 import { useOrientationContext } from './context/orientation';
@@ -141,7 +141,7 @@ const NavItems = styled.ul`
   margin: 0;
 `;
 
-const NavItem = styled(Link)`
+const NavItem = styled(NavLink)`
   display: block;
   padding: 10px;
   text-decoration: none;
@@ -151,6 +151,10 @@ const NavItem = styled(Link)`
 
   &:hover {
     background-color: ${(props: ThemedProps) => props.theme.colors.main};
+  }
+
+  &.active {
+    text-decoration: underline ${(props: ThemedProps) => props.theme.colors.accent};
   }
 `;
 
