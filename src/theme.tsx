@@ -4,30 +4,30 @@ const theme: ThemeInterface = {
     borderRadius: '5px',
 
     colors: {
-        main: '#000000', // Dark blue - primary background color
-        secondary: '#082032', // Medium blue - secondary background color for panels, modals
-        tertiary: '#334756', // Light blue - used for backgrounds of selected items, hover states
+        main: 'oklch(0% 0 0)', // Dark blue - primary background color
+        secondary: 'oklch(23.5% 0.046 244.24)', // Medium blue - secondary background color for panels, modals
+        tertiary: 'oklch(38.74% 0.036 241.23)', // Light blue - used for backgrounds of selected items, hover states
 
-        accent: '#F0A500', // Gold - accent color for buttons, links
-        secondaryAccent: '#FFFFFF', // White - secondary accent color for highlights, notifications
+        accent: 'oklch(77.52% 0.16272623898676697 76.16781831368107)', // Gold - accent color for buttons, links
+        secondaryAccent: 'oklch(100% 0 0)', // White - secondary accent color for highlights, notifications
 
-        textPrimary: '#F7FAFC', // Almost white - primary text color
-        textSecondary: '#E2E8F0', // Light gray - secondary text color for less important information
-        textOnAccent: '#0F1624', // Dark blue - text color on accent backgrounds
-        textOnSecondaryAccent: '#0F1624', // Dark blue - text color on secondary accent backgrounds
+        textPrimary: 'oklch(98.34% 0.004 236.5)', // Almost white - primary text color
+        textSecondary: 'oklch(92.88% 0.013 255.51)', // Light gray - secondary text color for less important information
+        textOnAccent: 'oklch(20.07% 0.03 263.54)', // Dark blue - text color on accent backgrounds
+        textOnSecondaryAccent: 'oklch(20.07% 0.03 263.54)', // Dark blue - text color on secondary accent backgrounds
 
-        border: '#334756', // Light blue - border color for dividers, tables, etc
-        borderAccent: '#F0A500', // Gold - border color for emphasis
+        border: 'oklch(38.74% 0.036 241.23)', // Light blue - border color for dividers, tables, etc
+        borderAccent: 'oklch(77.52% 0.16272623898676697 76.16781831368107)', // Gold - border color for emphasis
 
-        success: '#007E33', // Green - success color for notifications, alerts
-        warning: '#FF8800', // Orange - warning color for notifications, alerts
-        error: '#CC0000', // Red - error color for notifications, alerts
-        info: '#2196F3', // Blue - info color for notifications, alerts
+        success: 'oklch(51.77% 0.147 148.71)', // Green - success color for notifications, alerts
+        warning: 'oklch(74.42% 0.181 56.46)', // Orange - warning color for notifications, alerts
+        error: 'oklch(53.08% 0.2177996666501933 29.23388519234262)', // Red - error color for notifications, alerts
+        info: 'oklch(65.82% 0.169 248.81)', // Blue - info color for notifications, alerts
 
-        background: '#F7FAFC', // Almost white - background color for the page
-        backgroundSecondary: '#E2E8F0', // Light gray - secondary background color for panels, modals
+        background: 'oklch(98.34% 0.004 236.5)', // Almost white - background color for the page
+        backgroundSecondary: 'oklch(92.88% 0.013 255.51)', // Light gray - secondary background color for panels, modals
 
-        title: '#F0A500', // Gold - color for titles, headings, etc
+        title: 'oklch(77.52% 0.16272623898676697 76.16781831368107)', // Gold - color for titles, headings, etc
     },
 
     fonts: {
