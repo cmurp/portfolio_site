@@ -1,44 +1,25 @@
 import React, { useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
+import styled from 'styled-components';
 import { Link } from 'react-router-dom';
-
-const rippleAnimation = keyframes`
-  0% {
-    text-shadow: 0 0 0.5em #FF0000, 0 0 0.5em #FF0000, 0 0 0.5em #FF0000;
-  }
-  50% {
-    text-shadow: 0 0 0.2em #FF0000, 0 0 0.2em #FF0000, 0 0 0.5em #FF0000;
-  }
-  100% {
-    text-shadow: 0 0 0.5em #FF0000, 0 0 0.5em #FF0000, 0 0 0.5em #FF0000;
-  }
-`;
-
-const liquid = keyframes`
-  0%, 100% {
-    text-shadow: 3px 0px 2px #000, -3px 0px 2px #000, 0px 3px 2px #000, 0px -3px 2px #000;
-  }
-  50% {
-    text-shadow: 3px 3px 2px #000, -3px -3px 2px #000, -3px 3px 2px #000, 3px -3px 2px #000;
-  }
-`;
-
-const moveBackground = keyframes`
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 100% 0;
-  }
-`;
 
 const MainText = styled.h1`
   margin-top: -20%;
   font-size: 3em;
-  text-shadow: 0px 1px 0px #fff, 0px 2px 0px #fff, 0px 3px 0px #ccc, 0px 4px 0px #ccc, 0px 5px 0px #aaa, 0px 6px 1px rgba(0,0,0,.1), 0px 0px 5px rgba(0,0,0,.1), 0px 1px 3px rgba(0,0,0,.3), 0px 3px 5px rgba(0,0,0,.2), 0px 5px 10px rgba(0,0,0,.25), 0px 10px 10px rgba(0,0,0,.2), 0px 20px 20px rgba(0,0,0,.15);
+  text-shadow:  0px 1px 0px ${(props: any) => props.theme.colors.textPrimary}, 
+                0px 2px 0px black,
+                0px 3px 0px ${(props: any) => props.theme.colors.textSecondary},
+                0px 4px 0px black,
+                0px 5px 0px ${(props: any) => props.theme.colors.textPrimary},  
+                0px 6px 1px ${(props: any) => props.theme.colors.main}, 
+                0px 0px 5px rgba(0,0,0,.1), 
+                0px 1px 3px rgba(0,0,0,.3), 
+                0px 3px 5px rgba(0,0,0,.2), 
+                0px 5px 10px rgba(0,0,0,.25), 
+                0px 10px 10px rgba(0,0,0,.2), 
+                0px 20px 20px rgba(0,0,0,.15);
   position: relative;
   background-clip: text;
-  background-color: blue;
+  background-color: ${(props: any) => props.theme.colors.textOnAccent};
   color: transparent;
   -webkit-background-clip: text;
   transition: opacity 2s ease;
@@ -47,14 +28,14 @@ const MainText = styled.h1`
 
 const TagLine = styled.span`
   font-size: 1.5em;
-  color: grey;
+  color: ${(props: any) => props.theme.colors.textSecondary};
   &::after {
     content: "";
     display: block;
     margin: auto;
     height: 2px;
-    background: linear-gradient(to right, transparent, grey, transparent);
-    width: 50%;
+    background: linear-gradient(to right, transparent, ${(props: any) => props.theme.colors.textSecondary}, transparent);
+    width: 70%;
   }
 `;
 
