@@ -19,13 +19,13 @@ import { NavigationActivatedContext } from "./context/NavigationActivatedContext
 import Layout from "./Layout";
 import CanvasBackground from "./components/CanvasBackground.styled";
 
-const AppContainer = () => {
-  const Container = styled.div`
-    position: fixed;
-    height: 100vh;
-    width: 100vw;
-  `;
+const Container = styled.div`
+  position: fixed;
+  height: 100vh;
+  width: 100vw;
+`;
 
+const AppContainer = () => {
   return (
     <>
       <CanvasBackground />

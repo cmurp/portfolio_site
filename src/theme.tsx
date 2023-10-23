@@ -4,7 +4,7 @@ const theme: ThemeInterface = {
     borderRadius: '5px',
 
     colors: {
-        main: 'oklch(0% 0 0)', // Dark blue - primary background color
+        main: 'oklch(0% 0 0)', // black - primary background color
         secondary: 'oklch(23.5% 0.046 244.24)', // Medium blue - secondary background color for panels, modals
         tertiary: 'oklch(38.74% 0.036 241.23)', // Light blue - used for backgrounds of selected items, hover states
 

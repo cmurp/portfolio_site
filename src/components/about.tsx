@@ -4,14 +4,12 @@ import World from "./world.jsx";
 const Container = styled.div`
     display: flex;
     flex-direction: column;
-    width: 80%;
     align-items: center;
 `;
 
 const HelloWorld = styled.div`
     flex: 1;
     padding: 2rem;
-    /* background-color: #00000099; */
     color: ${(props: any) => props.theme.colors.textPrimary};
     font-size: 2rem;
     `;
@@ -31,7 +29,7 @@ const BoldName = styled.h1`
 const AccentedDescription = styled.h1`
     font-size: 2rem;
     font-weight: bold;
-    color: #0000;
+    color: transparent;
     -webkit-text-stroke: .5px ${(props: any) => props.theme.colors.accent};
 `;
 
@@ -46,7 +44,7 @@ const StyledLink = styled.a`
 
 const BoldSpan = styled.span`
     font-weight: bold;
-    color: #0000;
+    color: transparent;
     -webkit-text-stroke: .5px ${(props: any) => props.theme.colors.accent};
 `;
 

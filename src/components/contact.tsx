@@ -17,7 +17,7 @@ const BusinessCard = styled.div`
     width: 370px;
     height: 200px;
     align-items: center;
-    background: rgba( 255, 255, 255, 0.1 );
+    background: color-mix(in oklch,${(props: any) => props.theme.colors.secondary} 25%, ${(props: any) => props.theme.colors.secondary} 25%);
     box-shadow: 0 0px 24px 0 ${({ theme }) => theme.colors.shadow};
     backdrop-filter: blur( 2px );
     -webkit-backdrop-filter: blur( 2px );
@@ -35,7 +35,7 @@ const Header = styled.h1`
 
 const BoldSpan = styled.span`
     font-weight: bold;
-    color: #0000;
+    color: transparent;
     -webkit-text-stroke: .5px ${(props: any) => props.theme.colors.accent};
 `;
 
