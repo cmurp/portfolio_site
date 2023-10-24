@@ -1,5 +1,5 @@
 import styled from "styled-components";
-import World from "./world.jsx";
+import World from "../branding/world.jsx";
 
 const Container = styled.div`
     display: flex;

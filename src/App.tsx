@@ -11,10 +11,10 @@ import theme from './theme';
 import './App.css';
 
 import ErrorPage from './error-page';
-import Contact from "./components/contact";
-import About from "./components/about";
+import Contact from "./components/pages/contact";
+import About from "./components/pages/about";
 import Blog from './components/blog/blog';
-import Landing from './components/landing';
+import Landing from './components/pages/landing';
 import { NavigationActivatedContext } from "./context/NavigationActivatedContext";
 import Layout from "./Layout";
 import CanvasBackground from "./components/CanvasBackground.styled";
