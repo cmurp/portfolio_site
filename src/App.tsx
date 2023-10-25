@@ -13,7 +13,7 @@ import './App.css';
 import ErrorPage from './error-page';
 import Contact from "./components/pages/contact";
 import About from "./components/pages/about";
-import Blog from './components/blog/blog';
+import Blog from './components/pages/blog/blog';
 import Landing from './components/pages/landing';
 import { NavigationActivatedContext } from "./context/NavigationActivatedContext";
 import Layout from "./Layout";
