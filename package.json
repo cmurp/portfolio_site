@@ -19,6 +19,7 @@
     "glslify": "^7.1.1",
     "leva": "^0.9.34",
     "react": "^18.2.0",
+    "react-animated-cursor": "^2.11.2",
     "react-dom": "^18.2.0",
     "react-globe.gl": "^2.26.0",
     "react-icons": "^4.8.0",
@@ -56,7 +57,7 @@
     ]
   },
   "devDependencies": {
-    "@wixc3/react-board": "^2.3.0",
-    "@babel/plugin-proposal-private-property-in-object": "^7.21.11"
+    "@babel/plugin-proposal-private-property-in-object": "^7.21.11",
+    "@wixc3/react-board": "^2.3.0"
   }
 }
