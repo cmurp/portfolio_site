@@ -35,6 +35,7 @@ const Navigation = styled.nav<TopNavigationProps>`
 
 const Icon = styled.div`
   font-size: 2rem;
+  color: transparent;
 `;
 
 const Hamburger = styled.button`
@@ -90,8 +91,7 @@ const TopNav = () => {
     <Navigation ref={containerRef} id="top-nav" theme={theme} visible={visible}>
       <Hamburger onClick={handleToggle}><BiMenuAltLeft/></Hamburger>
       <Logo alt="logo"></Logo>
-      {/* <Icon><BiCog/></Icon> */}
-      <Icon></Icon>
+      <Icon><BiCog/></Icon>
 
     </Navigation>
   );
