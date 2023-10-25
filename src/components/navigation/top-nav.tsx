@@ -9,7 +9,7 @@ import { ContentRefContext, useContentRefContext } from '../../context/ContentRe
 
 interface TopNavigationProps {
   theme?: any;
-  visible?: boolean;
+  _visible?: boolean;
 }
 
 const Navigation = styled.nav<TopNavigationProps>`
@@ -19,7 +19,7 @@ const Navigation = styled.nav<TopNavigationProps>`
   width: 100%;
   height: 3rem;
   padding: 0 1rem;
-  top: ${(props) => (props.visible ? '0' : '-2rem')};
+  top: ${(props) => (props._visible ? '0' : '-2rem')};
   background-color: ${(props: TopNavigationProps) => props.theme.colors.secondary};
   color: ${(props: TopNavigationProps) => props.theme.colors.textSecondary};
   display: flex;
@@ -88,7 +88,7 @@ const TopNav = () => {
 
 
   return (
-    <Navigation ref={containerRef} id="top-nav" theme={theme} visible={visible}>
+    <Navigation ref={containerRef} id="top-nav" theme={theme} _visible={visible}>
       <Hamburger onClick={handleToggle}><BiMenuAltLeft/></Hamburger>
       <Logo alt="logo"></Logo>
       <Icon><BiCog/></Icon>
