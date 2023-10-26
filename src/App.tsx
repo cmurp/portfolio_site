@@ -10,7 +10,7 @@ import { GlobalStyle } from './GlobalStyle';
 import theme from './theme';
 import './App.css';
 
-import ErrorPage from './error-page';
+import ErrorPage from './components/pages/error-page';
 import Contact from "./components/pages/contact";
 import About from "./components/pages/about";
 import Blog from './components/pages/blog/blog';
