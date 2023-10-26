@@ -27,7 +27,7 @@ const BusinessCard = styled.div`
 
 const Header = styled.h1`
   margin-top: .2rem;
-  display: flex;
+  display: flex; 
   flex-direction: row;
   align-items: center;
   justify-content: space-between;

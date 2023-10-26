@@ -2,8 +2,8 @@ import React, { useEffect } from "react";
 import styled, { useTheme } from "styled-components";
 
 import { useButtonClickedContext } from "./context/buttonClicked";
-import { TypingEffect } from "../../text/typing-effect";
-import Text from "../../text/text";
+import { TypingEffect } from "../../effects/typing-effect";
+import Text from "../../branding/text";
 
 import { LIPSUM } from "../../../constants";
 

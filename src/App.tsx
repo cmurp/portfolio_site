@@ -18,6 +18,7 @@ import Landing from './components/pages/landing';
 import { NavigationActivatedContext } from "./context/NavigationActivatedContext";
 import Layout from "./Layout";
 import CanvasBackground from "./components/CanvasBackground.styled";
+import CustomCursor from "./components/effects/CustomCursor";
 import NotFoundPage from "./components/pages/notFoundPage";
 
 const Container = styled.div`
