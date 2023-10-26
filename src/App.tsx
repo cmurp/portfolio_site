@@ -10,7 +10,7 @@ import { GlobalStyle } from './GlobalStyle';
 import theme from './theme';
 import './App.css';
 
-import ErrorPage from './components/pages/error-page';
+import ErrorBoundary from './components/pages/error-boundary';
 import Contact from "./components/pages/contact";
 import About from "./components/pages/about";
 import Blog from './components/pages/blog/blog';
@@ -32,7 +32,9 @@ const AppContainer = () => {
     <>
       <CanvasBackground />
       <Container>
-          <Outlet />
+          <ErrorBoundary>
+            <Outlet />
+          </ErrorBoundary>
       </Container>
       <CustomCursor />
     </>
@@ -45,7 +47,6 @@ const AppContainer = () => {
 const router = createBrowserRouter([
   {
     element: <AppContainer />,
-    errorElement: <ErrorPage />,
     children: [
       {
         path: "/",

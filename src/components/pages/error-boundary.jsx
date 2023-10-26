@@ -2,7 +2,7 @@ import { useRouteError } from "react-router-dom";
 import styled from "styled-components";
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import { Link } from "react-router-dom";
-
+import React from "react";
 
 
 const Container = styled.div`
@@ -50,30 +50,47 @@ const FiveHundred = styled.div`
     text-align: center;
 `;
 
-export default function ErrorPage() {
-  const error = useRouteError();
-
-  // Log the error if it exists
-  if (error) {
-    console.error(error);
+class ErrorBoundary extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { hasError: false, error: null };
   }
 
-  return (
-      <Container>
-        <AnimContainer>
+  static getDerivedStateFromError(error) {
+    return { hasError: true, error: error };
+  }
+
+  componentDidCatch(error, errorInfo) {
+    console.error(error, errorInfo);
+  }
+
+  render() {
+    if (this.state.hasError) {
+      return (
+        <Container>
+          <AnimContainer>
             <Player
               autoplay
               loop
               src="background.json"
               style={{ height: '300px', width: '100%' }}
-              >
-              <Controls visible={false}/>
+            >
+              <Controls visible={false} />
             </Player>
             <FiveHundred>500</FiveHundred>
-        </AnimContainer>
-        <h1>Oops!</h1>
-        <p>Sorry, an unexpected error has occurred.</p>
-        <HomeButton to="/">Return Home</HomeButton>
-      </Container>
-  );
+          </AnimContainer>
+          <h1>Oops!</h1>
+          <p>Sorry, an unexpected error has occurred.</p>
+          <i>{this.state.error ? (this.state.error.statusText || this.state.error.message) : 'Unknown error'}</i>
+          <HomeButton to="/">Return Home</HomeButton>
+        </Container>
+      );
+    }
+
+
+
+    return this.props.children;
+  }
 }
+
+export default ErrorBoundary;
