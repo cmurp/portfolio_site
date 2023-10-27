@@ -23,7 +23,7 @@ const Layout = () => {
     padding: 2rem;
   `;
 
-  const {isVertical,} = useOrientation();
+  const {isVertical} = useOrientation();
   const contentRef = useRef<HTMLDivElement>(null);
   return (
     <>

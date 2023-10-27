@@ -6,6 +6,7 @@ import { BiCog } from 'react-icons/bi';
 import Logo from '../branding/logo';
 import { useSideNavStateContext } from './context/side-nav-state';
 import { ContentRefContext, useContentRefContext } from '../../context/ContentRefContext';
+import NavButton from './nav-button';
 
 interface TopNavigationProps {
   theme?: any;
@@ -18,7 +19,6 @@ const Navigation = styled.nav<TopNavigationProps>`
   left: 0;
   width: 100%;
   height: 3rem;
-  padding: 0 1rem;
   top: ${(props) => (props._visible ? '0' : '-2rem')};
   background-color: ${(props: TopNavigationProps) => props.theme.colors.secondary};
   color: ${(props: TopNavigationProps) => props.theme.colors.textSecondary};
@@ -44,6 +44,7 @@ const Hamburger = styled.button`
   color: teal;
   border: none;
   cursor: pointer;
+  position: relative;
 `;
 
 const TopNav = () => {
@@ -89,7 +90,7 @@ const TopNav = () => {
 
   return (
     <Navigation ref={containerRef} id="top-nav" theme={theme} _visible={visible}>
-      <Hamburger onClick={handleToggle}><BiMenuAltLeft/></Hamburger>
+      <Hamburger onClick={handleToggle}><NavButton opened={isOpen}/></Hamburger>
       <Logo alt="logo"></Logo>
       <Icon><BiCog/></Icon>
 

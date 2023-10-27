@@ -94,7 +94,7 @@ const NavContainer = styled.nav<ThemedProps>`
     position: absolute;
     top: 0;
     left: 0;
-    z-index: 999;
+    z-index: 998;
   }
   --nav-width: 10rem;
 
