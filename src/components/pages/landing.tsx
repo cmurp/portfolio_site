@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react';
-import styled from 'styled-components';
+import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 
 const MainText = styled.h1`
@@ -40,9 +40,10 @@ const TagLine = styled.span`
 `;
 
 const NavButton = styled(Link)`
+  width: 250px;  
   background-color: transparent;
   border: 1px solid white;
-  border-radius: 5px;
+  border-radius: 10px;
   padding: 0.5em 1em;
   color: white;
   font-size: 1.5em;
@@ -54,6 +55,19 @@ const NavButton = styled(Link)`
     background-color: white;
     color: black;
   }
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  animation: ${props => keyframes`
+    0% {
+      box-shadow: 0 0 3px ${props.theme.colors.textPrimary}, 
+                  0 0 4px ${props.theme.colors.textPrimary};
+    }
+    100% {
+      box-shadow: 0 0 10px ${props.theme.colors.textPrimary}, 
+                  0 0 15px ${props.theme.colors.textPrimary};
+    }
+  `} 2s infinite alternate;
 `;
 
 const Container = styled.div`
