@@ -72,7 +72,7 @@ class ErrorBoundary extends React.Component {
             <Player
               autoplay
               loop
-              src="background.json"
+              src="anims/background.json"
               style={{ height: '300px', width: '100%' }}
             >
               <Controls visible={false} />

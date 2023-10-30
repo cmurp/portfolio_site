@@ -40,7 +40,7 @@ const NotFoundPage: React.FC = () => {
             <Player
                 autoplay
                 loop
-                src="404.json"
+                src="anims/404.json"
                 style={{ height: '300px', width: '300px' }}
                 >
                 <Controls visible={false}/>
