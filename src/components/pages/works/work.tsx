@@ -9,7 +9,12 @@ import { CiSquareRemove, CiSquarePlus
  } from "react-icons/ci";
 
 
-
+const Container = styled.div`
+  display: flex;
+  margin-top: 2rem;
+  justify-content:center;
+  width: 100%;
+`;
 
 const ResumeGrid = styled.div`
   display: grid;
@@ -154,29 +159,31 @@ export default function Work() {
   if (!works) return <p>Loading...</p>;
 
   return (
-<ResumeGrid>
-    <Title>Work</Title>
-    <FilterSection>
-      {Object.keys(filters).map((tag) => (
-        <FilterTag color={tagColors[tag]} active={filters[tag]} key={tag} onClick={() => toggleFilter(tag)}>
-          {tag}
-        </FilterTag>
-      ))}
-    </FilterSection>
-    <Bullets>
-      {works.works.map((work, index) => (
-        work.tags.some((tag) => filters[tag]) && (
-          <BulletPoint key={index}>
-            <div>
-              {work.tags.map((tag, tagIndex) => (
-                <Tag color={tagColors[tag]} active={filters[tag]} key={tagIndex}>{tag}</Tag>
-              ))}
-            </div>
-            {work.text}
-          </BulletPoint>
-        )
-      ))}
-    </Bullets>
-  </ResumeGrid>
+    <Container>
+      <ResumeGrid>
+          <Title>Work</Title>
+          <FilterSection>
+            {Object.keys(filters).map((tag) => (
+              <FilterTag color={tagColors[tag]} active={filters[tag]} key={tag} onClick={() => toggleFilter(tag)}>
+                {tag}
+              </FilterTag>
+            ))}
+          </FilterSection>
+          <Bullets>
+            {works.works.map((work, index) => (
+              work.tags.some((tag) => filters[tag]) && (
+                <BulletPoint key={index}>
+                  <div>
+                    {work.tags.map((tag, tagIndex) => (
+                      <Tag color={tagColors[tag]} active={filters[tag]} key={tagIndex}>{tag}</Tag>
+                    ))}
+                  </div>
+                  {work.text}
+                </BulletPoint>
+              )
+            ))}
+          </Bullets>
+        </ResumeGrid>
+    </Container>
   );
 };
