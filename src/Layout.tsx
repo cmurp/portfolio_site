@@ -20,7 +20,7 @@ const Layout = () => {
     height: 100%;
     width: 100%;
     overflow-y: auto;
-    padding: 2rem;
+    padding: ${(props) => props.theme.sizes.topnav};
   `;
 
   const {isVertical} = useOrientation();

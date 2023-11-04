@@ -60,6 +60,10 @@ declare module 'styled-components' {
         tablet: string;
         desktop: string;
       };
+
+      sizes: {
+        topnav: string;
+      };
   
       animations: {
         transitionTime: string;

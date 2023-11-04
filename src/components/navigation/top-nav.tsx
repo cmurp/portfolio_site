@@ -18,7 +18,7 @@ const Navigation = styled.nav<TopNavigationProps>`
   top: 0;
   left: 0;
   width: 100%;
-  height: 3rem;
+  height: ${(props) => props.theme.sizes.topnav};
   top: ${(props) => (props._visible ? '0' : '-2rem')};
   background-color: ${(props: TopNavigationProps) => props.theme.colors.secondary};
   color: ${(props: TopNavigationProps) => props.theme.colors.textSecondary};
