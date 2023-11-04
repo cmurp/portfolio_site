@@ -16,11 +16,12 @@ const TextDisplay = styled.div<TextDisplayProps>`
     color: ${(props: TextDisplayProps) => props.theme.colors.textPrimary};
     font-weight: ${(props: TextDisplayProps) => props.theme.fontWeights.bold};
     line-height: 1.5;  // A line-height of 1.5 is generally comfortable for reading.
+    width: 100%;  // This ensures the paragraph is only as wide as it needs to be.
     max-width: 35em;  // A max-width in "em" ensures a limit to the line length.
     margin: 0 auto;  // Centres the paragraph if it's less than the max-width.
 `;
 
-const Text: React.FC<Props> = ({ children }) => {
+const TextBlock: React.FC<Props> = ({ children }) => {
     const theme = useTheme();
     return (
         <TextDisplay theme={theme}>
@@ -29,4 +30,4 @@ const Text: React.FC<Props> = ({ children }) => {
     );
 };
 
-export default Text;
+export default TextBlock;
