@@ -1,0 +1,18 @@
+{
+    "works": [
+        {
+            "text": "test1",
+            "tags": ["Java","Analytics"]
+        },
+        {
+            "text": "test2",
+            "tags": ["Python","ML"]
+        }
+    ],
+    "tags": {
+        "Java": "orange",
+        "Python": "green",
+        "Analytics": "yellow",
+        "ML": "magenta"
+    }
+}

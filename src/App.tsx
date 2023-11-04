@@ -20,6 +20,7 @@ import Layout from "./Layout";
 import CanvasBackground from "./components/CanvasBackground.styled";
 import CustomCursor from "./components/effects/CustomCursor";
 import NotFoundPage from "./components/pages/notFoundPage";
+import Work from "./components/pages/works/work";
 
 const Container = styled.div`
   position: fixed;
@@ -72,6 +73,16 @@ const router = createBrowserRouter([
           }
         ]
       },
+      {
+        path: "work",
+        element: <Layout />,
+        children: [
+          {
+            index: true,
+            element: <Work />,
+          }
+        ]
+     },
       {
         path: "contact",
         element: <Layout />,
