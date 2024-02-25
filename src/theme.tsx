@@ -19,7 +19,7 @@ const theme: ThemeInterface = {
         border: 'oklch(38.74% 0.036 241.23)', // Light blue - border color for dividers, tables, etc
         borderAccent: 'oklch(77.52% 0.16272623898676697 76.16781831368107)', // Gold - border color for emphasis
 
-        success: 'oklch(51.77% 0.147 148.71)', // Green - success color for notifications, alerts
+        success: 'teal', // Green - success color for notifications, alerts
         warning: 'oklch(74.42% 0.181 56.46)', // Orange - warning color for notifications, alerts
         error: 'oklch(53.08% 0.2177996666501933 29.23388519234262)', // Red - error color for notifications, alerts
         info: 'oklch(65.82% 0.169 248.81)', // Blue - info color for notifications, alerts
@@ -31,8 +31,8 @@ const theme: ThemeInterface = {
     },
 
     fonts: {
-        primary: 'Poppins, sans-serif', // Primary font for text
-        code: 'Courier, monospace', // Font for code blocks, data presentation
+        primary:  'VT323, monospace', /* This is a Google Font similar to old terminal fonts */
+        code: 'system-ui, consolas, monospace', // Font for code blocks, data presentation
     },
 
     fontSizes: {

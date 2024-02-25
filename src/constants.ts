@@ -12,6 +12,15 @@ export const QUERIES = {
     'smallerThanDesktop': `(max-width: ${BREAKPOINTS.bigScreen}px)`,
   }
 
+export const NAME_ASCII = `
+  ██████╗██╗  ██╗██████╗ ██╗███████╗    ███╗   ███╗██╗   ██╗██████╗ ██████╗ ██╗  ██╗██╗   ██╗
+ ██╔════╝██║  ██║██╔══██╗██║██╔════╝    ████╗ ████║██║   ██║██╔══██╗██╔══██╗██║  ██║╚██╗ ██╔╝
+ ██║     ███████║██████╔╝██║███████╗    ██╔████╔██║██║   ██║██████╔╝██████╔╝███████║ ╚████╔╝ 
+ ██║     ██╔══██║██╔══██╗██║╚════██║    ██║╚██╔╝██║██║   ██║██╔══██╗██╔═══╝ ██╔══██║  ╚██╔╝  
+ ╚██████╗██║  ██║██║  ██║██║███████║    ██║ ╚═╝ ██║╚██████╔╝██║  ██║██║     ██║  ██║   ██║   
+  ╚═════╝╚═╝  ╚═╝╚═╝  ╚═╝╚═╝╚══════╝    ╚═╝     ╚═╝ ╚═════╝ ╚═╝  ╚═╝╚═╝     ╚═╝  ╚═╝   ╚═╝   
+ `;
+
   export const LIPSUM = `Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam scelerisque felis et justo porttitor, id pellentesque erat dignissim. Nulla volutpat non augue non tincidunt. Vivamus sit amet lorem venenatis, eleifend nunc in, venenatis nibh. Praesent sodales laoreet lectus, a gravida tortor tincidunt tempor. Duis in ornare eros. Phasellus magna lacus, imperdiet sed tempor vitae, porttitor vitae dui. Donec et sapien eget magna dapibus lobortis. Integer in ligula diam. Duis et cursus nunc. Cras gravida, diam non interdum ullamcorper, libero turpis commodo enim, ut faucibus justo nisi at lectus. Donec vel vulputate purus, ut efficitur elit. Cras odio augue, ultricies auctor venenatis sit amet, molestie ac velit. Mauris non luctus felis. Nullam semper posuere urna non rhoncus. Donec id enim iaculis, tempor justo id, finibus dui. Pellentesque ut feugiat nulla.
 
   Quisque vel enim non dui elementum suscipit. Aliquam lobortis cursus neque, eu commodo tellus ullamcorper id. Donec eu dignissim metus. Quisque porta varius dui, sit amet venenatis neque. Pellentesque faucibus risus a risus commodo euismod. Donec at euismod urna. Mauris sed egestas est. Nunc risus sem, placerat a commodo eu, tincidunt pellentesque nulla. Suspendisse potenti. Donec malesuada, nisi sit amet finibus hendrerit, massa elit cursus magna, a tristique neque massa at massa. Praesent euismod pulvinar neque, eget placerat arcu pharetra nec. Nunc sagittis laoreet aliquet. Sed purus erat, finibus at nulla et, sagittis ornare risus. Duis facilisis efficitur risus, at tempus odio lobortis et.

@@ -2,6 +2,9 @@ import React, { useEffect } from 'react';
 import styled, { keyframes } from 'styled-components';
 import { Link } from 'react-router-dom';
 
+import Ascii from '../branding/ascii.styled';
+import { NAME_ASCII } from '../../constants';
+
 const MainText = styled.h1`
   margin-top: -20%;
   font-size: 3em;
@@ -88,12 +91,13 @@ const Landing: React.FC = () => {
 
   return (
     <Container>
-      <MainText>Chris Murphy</MainText>
+      {/* <MainText>Chris Murphy</MainText> */}
+      <Ascii children={NAME_ASCII}></Ascii>
       <TagLine>
         Full Stack Software Engineer
       </TagLine>
       <NavButton key="About Me" to="about">About Me</NavButton>
-      <NavButton key="View My Work" to="http://github.com/cmurp">View My Work</NavButton>
+      <NavButton key="View My Work" to="work">My Work</NavButton>
       <NavButton key="Contact Me" to="contact">Contact Me</NavButton>
     </Container>
   );
