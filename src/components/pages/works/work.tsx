@@ -4,7 +4,7 @@ import { Link } from "react-router-dom";
 import { DiGithubAlt } from "react-icons/di";
 import TextBlock from "../../branding/text-block";
 import DisintegrateText from "../../effects/disentegrate-text";
-
+import { Flipper, Flipped } from 'react-flip-toolkit';
 import { CiSquareRemove, CiSquarePlus
  } from "react-icons/ci";
 
@@ -18,13 +18,14 @@ const Container = styled.div`
 
 const ResumeGrid = styled.div`
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+  grid-template-columns: repeat(1, 1fr);
   grid-gap: ${(props) => props.theme.fontSizes.md};
   padding: 20px;
   background: ${props => props.theme.colors.secondary};
   border-radius: ${props => props.theme.borderRadius};
   color: ${props => props.theme.colors.textPrimary};
   font-family: ${(props) => props.theme.fonts.code};
+  flex: 1;
 
 
   /* Define grid template areas */
@@ -34,10 +35,9 @@ const ResumeGrid = styled.div`
     "content content content";
 `;
 
-const FilterSection = styled.div`
+const FilterSection = styled(Flipper)`
  display: flex;
  flex-wrap: wrap;
- width: 100%;
  grid-area: category;
 `;
 
@@ -62,7 +62,12 @@ const FilterTag = styled.button<{ active?: boolean, color?: string }>`
     justify-content: center;
     
   &:hover {
-    background-color: ${props => props.active ? props.theme.colors.main : props.theme.colors.tertiary};
+    background-color: ${(props) => 
+      props.active ? props.theme.colors.main : props.theme.colors.tertiary
+    };
+    color: ${(props) => 
+      props.active ? props.theme.colors.tertiary : props.theme.colors.main
+    };
   }
 `;
 
@@ -161,29 +166,37 @@ export default function Work() {
   return (
     <Container>
       <ResumeGrid>
-          <Title>Work</Title>
-          <FilterSection>
-            {Object.keys(filters).map((tag) => (
-              <FilterTag color={tagColors[tag]} active={filters[tag]} key={tag} onClick={() => toggleFilter(tag)}>
-                {tag}
-              </FilterTag>
+        <Title>Work</Title>
+        <FilterSection flipKey={Object.values(filters).join('')}>
+          {Object.entries(filters) // This gives you [string, boolean] tuples
+            .sort((a, b) => Number(b[1]) - Number(a[1])) // Sort boolean values
+            .map(([tag, active]) => (
+              <Flipped key={tag} flipId={tag}>
+                <FilterTag
+                  active={active} // active is boolean
+                  color={tagColors[tag] as string} // Cast color as string to ensure type safety
+                  onClick={() => toggleFilter(tag)}
+                >
+                  {tag}
+                </FilterTag>
+              </Flipped>
             ))}
-          </FilterSection>
-          <Bullets>
-            {works.works.map((work, index) => (
-              work.tags.some((tag) => filters[tag]) && (
-                <BulletPoint key={index}>
-                  <div>
-                    {work.tags.map((tag, tagIndex) => (
-                      <Tag color={tagColors[tag]} active={filters[tag]} key={tagIndex}>{tag}</Tag>
-                    ))}
-                  </div>
-                  {work.text}
-                </BulletPoint>
-              )
-            ))}
-          </Bullets>
-        </ResumeGrid>
+        </FilterSection>
+        <Bullets>
+          {works.works.map((work, index) => (
+            work.tags.some((tag) => filters[tag]) && (
+              <BulletPoint key={index}>
+                <div>
+                  {work.tags.map((tag, tagIndex) => (
+                    <Tag color={tagColors[tag]} active={filters[tag]} key={tagIndex}>{tag}</Tag>
+                  ))}
+                </div>
+                {work.text}
+              </BulletPoint>
+            )
+          ))}
+        </Bullets>
+      </ResumeGrid>
     </Container>
   );
 };

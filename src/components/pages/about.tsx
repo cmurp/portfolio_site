@@ -14,13 +14,13 @@ const HelloWorld = styled.div`
     font-size: 2rem;
     `;
 
-const UnderstatedHello = styled.h1`
+const UnderstatedHello = styled.span`
     font-size: 2rem;
     color: ${(props: any) => props.theme.colors.accent};
     font-weight: normal;
 `;
 
-const BoldName = styled.h1`
+const BoldName = styled.span`
     font-size: 2rem;
     color: ${(props: any) => props.theme.colors.textPrimary};
 
@@ -48,18 +48,32 @@ const BoldSpan = styled.span`
     -webkit-text-stroke: .5px ${(props: any) => props.theme.colors.accent};
 `;
 
+const Location = styled.div`
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    padding: 1.5;
+    color: ${(props: any) => props.theme.colors.textPrimary};
+    font-size: 1rem;
+`
+
 
 const About = () => {
     return (
         <Container>
             <HelloWorld>
-                <UnderstatedHello>Hi!</UnderstatedHello>
+                <UnderstatedHello>Hi!</UnderstatedHello>&nbsp;
                 <BoldName>I'm Chris Murphy,</BoldName>
                 <AccentedDescription>full stack software engineer.</AccentedDescription>
             </HelloWorld>
-            <World />
-            <p>Organizing toys in <BoldSpan>Summerfield, NC</BoldSpan></p>
-            <p>Organizing bytes at <StyledLink href="https://www.ibm.com/products/z-anomaly-analytics">IBM Z Anomaly Analytics</StyledLink></p>
+            <div>
+            I work at <StyledLink href="https://www.ibm.com/products/z-anomaly-analytics">IBM Z Anomaly Analytics</StyledLink>
+            </div>
+            <Location>
+                <p>Location:</p>
+                <World />
+            </Location>
         </Container>
     )};
 

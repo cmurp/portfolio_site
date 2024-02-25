@@ -3,7 +3,7 @@ import styled, { useTheme } from "styled-components";
 
 import { useButtonClickedContext } from "./context/buttonClicked";
 import { TypingEffect } from "../../effects/typing-effect";
-import Text from "../../branding/text";
+import Text from "../../branding/text-block";
 
 import { LIPSUM } from "../../../constants";
 

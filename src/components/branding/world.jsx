@@ -21,8 +21,8 @@ const World = (props) => {
     return (<Globe
       ref={globeEl}
       globeImageUrl="world.jpg"
-      height={400}
-      width={400}
+      height={200}
+      width={200}
       backgroundColor="rgba(0,0,0,0)"
       labelsData={places}
       labelLat={d => d.latitude}
