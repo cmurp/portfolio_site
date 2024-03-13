@@ -36,7 +36,7 @@ const TagLine = styled.span`
     content: "";
     display: block;
     margin: auto;
-    height: 2px;
+    height: 1px;
     background: linear-gradient(to right, transparent, ${(props: any) => props.theme.colors.textSecondary}, transparent);
     width: 70%;
   }
@@ -46,7 +46,7 @@ const NavButton = styled(Link)`
   width: 250px;  
   background-color: transparent;
   border: 1px solid white;
-  border-radius: 10px;
+  border-radius: 0px;
   padding: 0.5em 1em;
   color: white;
   font-size: 1.5em;
@@ -81,6 +81,25 @@ const Container = styled.div`
   flex-flow: column nowrap;
 `;
 
+const AsciiContainer = styled.div`
+    position: relative;
+    z-index: -2;
+    background-color: #000000;
+`
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 40%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 8rem;
+  height: 8rem;
+  border: solid white;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, 1.0);
+  z-index: -1;
+`;
+
 const Landing: React.FC = () => {
   useEffect(() => {
     const text = document.querySelector('.main-text');
@@ -92,9 +111,14 @@ const Landing: React.FC = () => {
   return (
     <Container>
       {/* <MainText>Chris Murphy</MainText> */}
-      <Ascii children={NAME_ASCII}></Ascii>
+      <AsciiContainer>
+        {/* Overlay element here that goes in the background of the Ascii */}
+        <Ascii children={NAME_ASCII}></Ascii>
+        <Overlay></Overlay>
+      </AsciiContainer>
+      
       <TagLine>
-        Full Stack Software Engineer
+        Software Engineer
       </TagLine>
       <NavButton key="About Me" to="about">About Me</NavButton>
       <NavButton key="View My Work" to="work">My Work</NavButton>
