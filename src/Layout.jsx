@@ -40,6 +40,7 @@ const ContentArea = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  background-color: ${props => props.theme.colors.backgroundSecondary};
 `;
 
 const BottomBar = styled.div`
@@ -51,9 +52,11 @@ const BottomBar = styled.div`
 `;
 
 const NavigationIsland = styled.div`
-  background: black;
+  background: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(8px);
   color: white;
   border-radius: 9999px;
+  border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 300ms ease-in-out;
   z-index: 50;
   width: ${props => props.$isExpanded ? '16rem' : 'auto'};
@@ -61,23 +64,69 @@ const NavigationIsland = styled.div`
   display: flex;
   align-items: center;
   justify-content: center;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.3);
 `;
 
 const IconContainer = styled.div`
   display: flex;
-  gap: 1rem;
-  padding: 0 1rem;
+  gap: 0.75rem;
+  padding: 0 0.75rem;
 `;
 
 const IconButton = styled.button`
-  padding: 0.5rem;
-  border-radius: 9999px;
-  transition: all 200ms;
-  background: ${props => props.$isActive ? 'white' : 'transparent'};
-  color: ${props => props.$isActive ? 'black' : 'white'};
+  position: relative;
+  width: 2rem;
+  height: 2rem;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 200ms ease-in-out;
+  background: ${props => props.$isActive ? 'rgba(255, 255, 255, 0.1)' : 'transparent'};
+  color: ${props => props.$isActive ? 'white' : 'rgba(255, 255, 255, 0.7)'};
+  border: 1px solid ${props => props.$isActive ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)'};
+
+  &::before {
+    content: '';
+    position: absolute;
+    inset: -2px;
+    border-radius: 50%;
+    border: 1px solid transparent;
+    transition: all 200ms ease-in-out;
+  }
+
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 50%;
+    box-shadow: ${props => props.$isActive ? '0 0 10px rgba(255, 255, 255, 0.2)' : 'none'};
+    transition: all 200ms ease-in-out;
+  }
 
   &:hover {
-    background: ${props => props.$isActive ? 'white' : 'rgba(255, 255, 255, 0.1)'};
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.3);
+    transform: scale(1.05);
+
+    &::before {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    &::after {
+      box-shadow: 0 0 15px rgba(255, 255, 255, 0.3);
+    }
+  }
+
+  svg {
+    width: 14px;
+    height: 14px;
+    opacity: ${props => props.$isActive ? 1 : 0.7};
+    transition: all 200ms ease-in-out;
+  }
+
+  &:hover svg {
+    opacity: 1;
   }
 `;
 
