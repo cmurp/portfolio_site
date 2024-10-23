@@ -1,9 +1,5 @@
-import { useState } from "react";
-import {
-  createBrowserRouter,
-  Outlet,
-  RouterProvider
-} from "react-router-dom";
+import { useState, useMemo } from "react";
+import { createBrowserRouter, useLocation, Outlet, useNavigate, RouterProvider } from 'react-router-dom';
 import { styled, ThemeProvider } from 'styled-components';
 
 import { GlobalStyle } from './GlobalStyle';
@@ -17,34 +13,35 @@ import Blog from './components/pages/blog/blog';
 import Landing from './components/pages/landing';
 import { NavigationActivatedContext } from "./context/NavigationActivatedContext";
 import Layout from "./Layout";
-import CanvasBackground from "./components/CanvasBackground.styled";
 import CustomCursor from "./components/effects/CustomCursor";
 import NotFoundPage from "./components/pages/notFoundPage";
 import Work from "./components/pages/works/work";
 
-const Container = styled.div`
-  position: fixed;
-  height: 100vh;
-  width: 100vw;
-`;
-
-const AppContainer = () => {
-  return (
-    <>
-      <CanvasBackground />
-      <Container>
-          <ErrorBoundary>
-            <Outlet />
-          </ErrorBoundary>
-      </Container>
-      <CustomCursor />
-    </>
-  );
-}
 
 /** Landing page will have it's own navigation, 
   * everything else will use the Layout component with standard navigation.
   */
+const AppContainer = () => {
+  // Get current route to determine active section
+  const location = useLocation();
+  const currentSection = useMemo(() => {
+    const path = location.pathname;
+    if (path === '/') return 'home';
+    return path.split('/')[1] || 'home';
+  }, [location]);
+
+  return (
+    <>
+      <Layout currentSection={currentSection}>
+        <ErrorBoundary>
+          <Outlet />
+        </ErrorBoundary>
+        {/* <CustomCursor /> */}
+      </Layout>
+    </>
+  );
+};
+
 const router = createBrowserRouter([
   {
     element: <AppContainer />,
@@ -55,51 +52,28 @@ const router = createBrowserRouter([
       },
       {
         path: "blog",
-        element: <Layout />,
-        children: [
-          {
-            index: true,
-            element: <Blog />,
-          }
-        ]
+        element: <Blog />
       },
       {
         path: "about",
-        element: <Layout />,
-        children: [
-          {
-            index: true,
-            element: <About />,
-          }
-        ]
+        element: <About />
       },
       {
         path: "work",
-        element: <Layout />,
-        children: [
-          {
-            index: true,
-            element: <Work />,
-          }
-        ]
-     },
+        element: <Work />
+      },
       {
         path: "contact",
-        element: <Layout />,
-        children: [
-          {
-            index: true,
-            element: <Contact />,
-          }
-        ]
-     },
-     {
+        element: <Contact />
+      },
+      {
         path: "*",
         element: <NotFoundPage />
-      },
+      }
     ]
   }
 ]);
+
 
 function App() {
   const [ navActivated, setNavActivated ] = useState<boolean>(false);

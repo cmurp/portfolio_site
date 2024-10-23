@@ -24,7 +24,7 @@ const theme: ThemeInterface = {
         error: 'oklch(53.08% 0.2177996666501933 29.23388519234262)', // Red - error color for notifications, alerts
         info: 'oklch(65.82% 0.169 248.81)', // Blue - info color for notifications, alerts
 
-        background: 'oklch(98.34% 0.004 236.5)', // Almost white - background color for the page
+        background: 'black', // Almost white - background color for the page
         backgroundSecondary: 'oklch(92.88% 0.013 255.51)', // Light gray - secondary background color for panels, modals
 
         title: 'oklch(77.52% 0.16272623898676697 76.16781831368107)', // Gold - color for titles, headings, etc

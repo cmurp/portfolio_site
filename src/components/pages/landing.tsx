@@ -1,129 +1,200 @@
-import React, { useEffect } from 'react';
-import styled, { keyframes } from 'styled-components';
-import { Link } from 'react-router-dom';
-
+// landing.tsx
+import React, { useEffect, useRef } from 'react';
+import styled from 'styled-components';
 import Ascii from '../branding/ascii.styled';
 import { NAME_ASCII } from '../../constants';
 
-const MainText = styled.h1`
-  margin-top: -20%;
-  font-size: 3em;
-  text-shadow:  0px 1px 0px ${(props: any) => props.theme.colors.textPrimary}, 
-                0px 2px 0px black,
-                0px 3px 0px ${(props: any) => props.theme.colors.textSecondary},
-                0px 4px 0px black,
-                0px 5px 0px ${(props: any) => props.theme.colors.textPrimary},  
-                0px 6px 1px ${(props: any) => props.theme.colors.main}, 
-                0px 0px 5px rgba(0,0,0,.1), 
-                0px 1px 3px rgba(0,0,0,.3), 
-                0px 3px 5px rgba(0,0,0,.2), 
-                0px 5px 10px rgba(0,0,0,.25), 
-                0px 10px 10px rgba(0,0,0,.2), 
-                0px 20px 20px rgba(0,0,0,.15);
+const Canvas = styled.canvas`
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 0;
+`;
+
+const ContentWrapper = styled.div`
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const MainContent = styled.div`
   position: relative;
-  background-clip: text;
-  background-color: ${(props: any) => props.theme.colors.textOnAccent};
-  color: transparent;
-  -webkit-background-clip: text;
-  transition: opacity 2s ease;
-  animation: move-background 5s infinite linear;
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+`;
+
+const AlignmentContainer = styled.div`
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: fit-content;
+  height: fit-content;
+`;
+
+const AsciiContainer = styled.div`
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  background-color: transparent;
+  mix-blend-mode: difference;
+`;
+
+const Overlay = styled.div`
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 6rem;
+  height: 6rem;
+  border: solid white;
+  border-radius: 100%;
+  background-color: rgba(255, 255, 255, 1.0);
 `;
 
 const TagLine = styled.span`
   font-size: 1.5em;
-  color: ${(props: any) => props.theme.colors.textSecondary};
+  margin-top: 1rem;
+  color: ${props => props.theme.colors.textSecondary};
+  text-align: center;
+  
   &::after {
     content: "";
     display: block;
     margin: auto;
     height: 1px;
-    background: linear-gradient(to right, transparent, ${(props: any) => props.theme.colors.textSecondary}, transparent);
+    background: linear-gradient(
+      to right,
+      transparent,
+      ${props => props.theme.colors.textSecondary},
+      transparent
+    );
     width: 70%;
+    margin-top: 0.5rem;
   }
 `;
 
-const NavButton = styled(Link)`
-  width: 250px;  
-  background-color: transparent;
-  border: 1px solid white;
-  border-radius: 0px;
-  padding: 0.5em 1em;
-  color: white;
-  font-size: 1.5em;
-  margin-top: 1em;
-  cursor: pointer;
-  transition: all 0.5s ease;
-  text-decoration: none;
-  &:hover {
-    background-color: white;
-    color: black;
-  }
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  animation: ${props => keyframes`
-    0% {
-      box-shadow: 0 0 3px ${props.theme.colors.textPrimary}, 
-                  0 0 4px ${props.theme.colors.textPrimary};
-    }
-    100% {
-      box-shadow: 0 0 10px ${props.theme.colors.textPrimary}, 
-                  0 0 15px ${props.theme.colors.textPrimary};
-    }
-  `} 2s infinite alternate;
-`;
-
-const Container = styled.div`
-  height: 100vh;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  flex-flow: column nowrap;
-`;
-
-const AsciiContainer = styled.div`
-    position: relative;
-    z-index: -2;
-    background-color: #000000;
-`
-
-const Overlay = styled.div`
-  position: absolute;
-  top: 40%;
-  left: 50%;
-  transform: translate(-50%, -50%);
-  width: 8rem;
-  height: 8rem;
-  border: solid white;
-  border-radius: 100%;
-  background-color: rgba(255, 255, 255, 1.0);
-  z-index: -1;
-`;
-
+interface Star {
+  x: number;
+  y: number;
+  z: number;
+}
 const Landing: React.FC = () => {
+  const canvasRef = useRef<HTMLCanvasElement>(null);
+
   useEffect(() => {
-    const text = document.querySelector('.main-text');
-    if (text) {
-      text.classList.add('animate-text');
-    }
+    const canvas = canvasRef.current;
+    if (!canvas) return;
+
+    const ctx = canvas.getContext('2d');
+    if (!ctx) return;
+
+    const updateDimensions = () => {
+      // Get the window dimensions instead of parent element
+      const width = window.innerWidth;
+      const height = window.innerHeight;
+      
+      const pixelRatio = window.devicePixelRatio || 1;
+      
+      // Set actual canvas dimensions
+      canvas.width = width * pixelRatio;
+      canvas.height = height * pixelRatio;
+      
+      // Set display size
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      
+      // Scale context
+      ctx.scale(pixelRatio, pixelRatio);
+    };
+
+    // Initialize stars with better visibility
+    const makeStars = (count: number): Star[] => {
+      return Array.from({ length: count }, () => ({
+        x: Math.random() * window.innerWidth - window.innerWidth/2,
+        y: Math.random() * window.innerHeight - window.innerHeight/2,
+        z: Math.random() * 1000
+      }));
+    };
+
+    let stars = makeStars(2000);
+    let animationFrameId: number;
+
+    const render = (time: number) => {
+      // Clear the canvas
+      ctx.fillStyle = 'black';
+      ctx.fillRect(0, 0, canvas.width, canvas.height);
+
+      const cx = window.innerWidth / 2;
+      const cy = window.innerHeight / 2;
+
+      // Update and draw stars
+      stars.forEach(star => {
+        star.z -= 0.5; // Slowed down the speed slightly
+
+        if (star.z <= 1) {
+          star.z = 1000;
+          star.x = Math.random() * window.innerWidth - window.innerWidth/2;
+          star.y = Math.random() * window.innerHeight - window.innerHeight/2;
+        }
+
+        const x = cx + star.x / (star.z * 0.001);
+        const y = cy + star.y / (star.z * 0.001);
+
+        if (x >= 0 && x < window.innerWidth && y >= 0 && y < window.innerHeight) {
+          const size = (1 - star.z / 1000) * 3; // Made stars slightly larger
+          const intensity = Math.floor((1 - star.z / 1000) * 255);
+          ctx.fillStyle = `rgb(${intensity},${intensity},${intensity})`;
+          ctx.fillRect(x, y, size, size);
+        }
+      });
+
+      animationFrameId = requestAnimationFrame(render);
+    };
+
+    // Handle resize
+    const handleResize = () => {
+      updateDimensions();
+    };
+
+    window.addEventListener('resize', handleResize);
+    updateDimensions(); // Initial setup
+    animationFrameId = requestAnimationFrame(render);
+
+    return () => {
+      window.removeEventListener('resize', handleResize);
+      cancelAnimationFrame(animationFrameId);
+    };
   }, []);
 
   return (
-    <Container>
-      {/* <MainText>Chris Murphy</MainText> */}
-      <AsciiContainer>
-        {/* Overlay element here that goes in the background of the Ascii */}
-        <Ascii children={NAME_ASCII}></Ascii>
-        <Overlay></Overlay>
-      </AsciiContainer>
+    <div className="relative w-full h-full overflow-hidden">
+      <Canvas ref={canvasRef} />
       
-      <TagLine>
-        Software Engineer
-      </TagLine>
-      <NavButton key="About Me" to="about">About Me</NavButton>
-      <NavButton key="View My Work" to="work">My Work</NavButton>
-      <NavButton key="Contact Me" to="contact">Contact Me</NavButton>
-    </Container>
+      <ContentWrapper>
+        <MainContent>
+          <AlignmentContainer>
+            <Overlay />
+            <AsciiContainer>
+              <Ascii>{NAME_ASCII}</Ascii>
+            </AsciiContainer>
+          </AlignmentContainer>
+          
+          <TagLine>
+            Software Engineer
+          </TagLine>
+        </MainContent>
+      </ContentWrapper>
+    </div>
   );
 };
 

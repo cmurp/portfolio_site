@@ -2,45 +2,32 @@ import styled from "styled-components";
 import { useState, useRef, useEffect } from "react";
 
 const Canvas = styled.canvas`
-  width: 100vw;
-  height: 100vh;
-  position: fixed;
+  width: 100%;
+  height: 100%;
+  position: absolute;
   top: 0;
   left: 0;
-  z-index: -1;
+  z-index: 0;
 `;
 
 const CanvasBackground = () => {
-  const [dimensions, setDimensions] = useState({ 
-    height: window.innerHeight,
-    width: window.innerWidth
-  });
   const canvasRef = useRef(null);
-/*************** */
-    
-/*************** */
   
   useEffect(() => {
     const canvas = canvasRef.current;
     const context = canvas.getContext('2d');
-    canvas.width = dimensions.width;
-    canvas.height = dimensions.height;
-    //Our first draw
-    context.fillStyle = '#000000'
-    context.fillRect(0, 0, context.canvas.width, context.canvas.height);
+    
+    const updateDimensions = () => {
+      const container = canvas.parentElement;
+      canvas.width = container.offsetWidth;
+      canvas.height = container.offsetHeight;
+      context.fillStyle = '#000000';
+      context.fillRect(0, 0, canvas.width, canvas.height);
+    };
 
-    function handleResize() {
-      setDimensions({
-        height: window.innerHeight,
-        width: window.innerWidth
-      });
-      canvas.width = dimensions.width;
-      canvas.height = dimensions.height;
-      context.fillStyle = '#000000'
-      context.fillRect(0, 0, context.canvas.width, context.canvas.height);
-    }
-
-    window.addEventListener('resize', handleResize);
+    updateDimensions();
+    const resizeObserver = new ResizeObserver(updateDimensions);
+    resizeObserver.observe(canvas.parentElement);
 
     const makeStars = count => {
       const out = [];
@@ -94,8 +81,8 @@ const CanvasBackground = () => {
 
       clear();
 
-      const cx = dimensions.width / 2;
-      const cy = dimensions.height / 2;
+      const cx = canvas.width / 2;
+      const cy = canvas.height / 2;
 
       const count = stars.length;
       for (var i = 0; i < count; i++) {
@@ -104,7 +91,7 @@ const CanvasBackground = () => {
         const x = cx + star.x / (star.z * 0.001);
         const y = cy + star.y / (star.z * 0.001);
 
-        if (x < 0 || x >= dimensions.width || y < 0 || y >= dimensions.height) {
+        if (x < 0 || x >= canvas.width || y < 0 || y >= canvas.height) {
           continue;
         }
 
@@ -118,11 +105,13 @@ const CanvasBackground = () => {
     };
 
     requestAnimationFrame(init);
+
+    return () => {
+      resizeObserver.disconnect();
+    };
   }, []);
 
-  return (
-    <Canvas ref={canvasRef} />
-  );
-}
+  return <Canvas ref={canvasRef} />;
+};
 
 export default CanvasBackground;
