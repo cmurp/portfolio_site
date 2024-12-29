@@ -3,26 +3,82 @@ import styled from 'styled-components';
 import { Home, BookOpen, Send } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
+//
+// 1) Force container to be full viewport in both directions
+//    so that absolute-positioned children know their reference size.
+//
 const Container = styled.div`
-  height: 100%;
-  width: 100%;
+  width: 100vw;       /* Use viewport width */
+  height: 100vh;      /* Use viewport height */
   background: black;
   color: white;
-  overflow: hidden;
-  position: relative;
+  position: relative; /* Important so children can absolutely position */
+  margin: 0;
+  padding: 0;
+  overflow: hidden;   /* Ensures no weird scrollbars show if something extends */
 `;
 
-const NavigationContainer = styled.div`
+//
+// 2) NavBar: fixed at top in landscape, bottom in portrait
+//    We keep your left text, center nav, right text layout.
+//
+const NavBar = styled.div`
   position: fixed;
-  top: 1%;
-  left: 50%;
-  transform: translateX(-50%);
+  left: 0;
+  right: 0;
   z-index: 50;
-  transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  height: 2.5rem;
+  display: flex;
+  align-items: center;
+  background: black;
+  padding: 0 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 
   @media (orientation: portrait) {
     top: auto;
-    bottom: 1%;
+    bottom: 0;
+    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-bottom: none;
+  }
+
+  @media (orientation: landscape) {
+    top: 0;
+  }
+`;
+
+//
+// 3) Split NavBar space into 3 sections (left, center, right)
+//
+const NavBarSection = styled.div`
+  display: flex;
+  align-items: center;
+  flex: ${(props) => props.flex || 0};
+  justify-content: ${(props) => props.align || 'center'};
+`;
+
+const LeftText = styled.div`
+  opacity: ${(props) => (props.$hide ? 0 : 0.7)};
+  pointer-events: ${(props) => (props.$hide ? 'none' : 'auto')};
+  transition: opacity 300ms ease-in-out;
+  padding-right: 1rem;
+
+  &:hover {
+    opacity: 1;
+  }
+`;
+
+const RightText = styled.div`
+  opacity: ${(props) => (props.$hide ? 0 : 0.7)};
+  pointer-events: ${(props) => (props.$hide ? 'none' : 'auto')};
+  transition: opacity 300ms ease-in-out;
+  padding-left: 1rem;
+
+  &:hover {
+    opacity: 1;
+  }
+
+  @media (max-width: 640px) {
+    display: none;
   }
 `;
 
@@ -33,7 +89,7 @@ const NavigationIsland = styled.div`
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 300ms ease-in-out;
   height: 2.5rem;
-  width: ${props => props.$isExpanded ? '16rem' : 'auto'};
+  width: ${(props) => (props.$isExpanded ? '16rem' : 'auto')};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -55,9 +111,12 @@ const IconButton = styled.button`
   align-items: center;
   justify-content: center;
   transition: all 200ms ease-in-out;
-  background: ${props => props.$isActive ? 'rgba(255, 255, 255, 0.1)' : 'transparent'};
-  color: ${props => props.$isActive ? 'white' : 'rgba(255, 255, 255, 0.7)'};
-  border: 1px solid ${props => props.$isActive ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)'};
+  background: ${(props) =>
+    props.$isActive ? 'rgba(255, 255, 255, 0.1)' : 'transparent'};
+  color: ${(props) => (props.$isActive ? 'white' : 'rgba(255, 255, 255, 0.7)')};
+  border: 1px solid
+    ${(props) =>
+      props.$isActive ? 'rgba(255, 255, 255, 0.2)' : 'rgba(255, 255, 255, 0.1)'};
 
   &::before {
     content: '';
@@ -73,7 +132,8 @@ const IconButton = styled.button`
     position: absolute;
     inset: 0;
     border-radius: 50%;
-    box-shadow: ${props => props.$isActive ? '0 0 10px rgba(255, 255, 255, 0.2)' : 'none'};
+    box-shadow: ${(props) =>
+      props.$isActive ? '0 0 10px rgba(255, 255, 255, 0.2)' : 'none'};
     transition: all 200ms ease-in-out;
   }
 
@@ -94,7 +154,7 @@ const IconButton = styled.button`
   svg {
     width: 14px;
     height: 14px;
-    opacity: ${props => props.$isActive ? 1 : 0.7};
+    opacity: ${(props) => (props.$isActive ? 1 : 0.7)};
     transition: all 200ms ease-in-out;
   }
 
@@ -103,16 +163,16 @@ const IconButton = styled.button`
   }
 `;
 
+//
+// 4) Frame: we keep the "terminal screen" effect here.
+//    It's position: relative so we can have an absolutely positioned content area.
+//
 const Frame = styled.div`
   width: 100%;
-  min-height: 100vh;
-  display: grid;
-  grid-template-rows: auto 1fr auto;
-  gap: 0.5rem;
-  padding: 0.5rem;
-  transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
-  
-  // Terminal screen effect
+  height: 100%;
+  position: relative;
+
+  /* Terminal screen effect */
   &::before {
     content: '';
     position: absolute;
@@ -126,7 +186,7 @@ const Frame = styled.div`
     opacity: 0.2;
   }
 
-  // Frame border effect
+  /* Frame border effect */
   &::after {
     content: '';
     position: absolute;
@@ -139,45 +199,26 @@ const Frame = styled.div`
   }
 `;
 
-const TopBar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 2.5rem;
-  padding: 0 1rem;
-  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-  font-family: 'VT323', monospace;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-size: 0.875rem;
-  
-  & > div {
-    opacity: 0.7;
-    transition: opacity 0.2s ease;
-    
-    &:hover {
-      opacity: 1;
-    }
-  }
-
-  .title-engineer {
-    @media (max-width: 640px) {
-      display: none;
-    }
-  }
-`;
-
+//
+// 5) ContentArea: absolutely fill from top edge to bottom edge
+//    BUT we shift down in landscape (2.5rem) or shift up in portrait (bottom: 2.5rem).
+//
 const ContentArea = styled.div`
-  position: relative;
-  width: 100%;
-  height: 100%;
-  border-radius: 0.25rem;
-  overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
+  position: absolute;
+  left: 0;
+  right: 0;
+
+  @media (orientation: landscape) {
+    top: 2.5rem;
+    bottom: 0;
+  }
+
+  @media (orientation: portrait) {
+    top: 0;
+    bottom: 2.5rem;
+  }
+
   background-color: black;
-  border: 1px solid rgba(255, 255, 255, 0.05);
 `;
 
 const CanvasWrapper = styled.div`
@@ -189,19 +230,25 @@ const CanvasWrapper = styled.div`
   }
 `;
 
+//
+// This wrapper fades in/out your content on navigation.
+//
 const ContentWrapper = styled.div`
   position: absolute;
   inset: 0;
   transition: opacity 300ms ease-in-out;
-  opacity: ${props => props.$transitioning ? 0 : 1};
+  opacity: ${(props) => (props.$transitioning ? 0 : 1)};
 `;
 
 const Layout = ({ children, currentSection }) => {
   const navigate = useNavigate();
   const [isTransitioning, setIsTransitioning] = useState(false);
   const canvasRef = useRef(null);
-  const contentRef = useRef(null);
+
+  // For expanding the nav island on 'blog'
   const isExpandedSection = currentSection === 'blog';
+  // For hiding text on the homepage
+  const isHomePage = currentSection === 'home';
 
   const navItems = [
     { id: 'home', icon: Home },
@@ -224,12 +271,11 @@ const Layout = ({ children, currentSection }) => {
     }
   }, []);
 
-  const handleNavigation = (section) => {
+  const handleNavigation = async (section) => {
     if (section === currentSection) return;
-
     setIsTransitioning(true);
-    const path = section === 'home' ? '/' : `/${section}`;
 
+    const path = section === 'home' ? '/' : `/${section}`;
     setTimeout(() => {
       navigate(path);
       setIsTransitioning(false);
@@ -238,32 +284,40 @@ const Layout = ({ children, currentSection }) => {
 
   return (
     <Container>
-      <NavigationContainer $isExpandedSection={isExpandedSection}>
-        <NavigationIsland>
-          <IconContainer>
-            {navItems.map(({ id, icon: Icon }) => (
-              <IconButton
-                key={id}
-                $isActive={currentSection === id}
-                onClick={() => handleNavigation(id)}
-              >
-                <Icon size={16} />
-              </IconButton>
-            ))}
-          </IconContainer>
-        </NavigationIsland>
-      </NavigationContainer>
+      {/* NavBar: fixed top (landscape) or bottom (portrait) */}
+      <NavBar>
+        <NavBarSection flex={1} align="flex-start">
+          <LeftText $hide={isHomePage}>Chris Murphy</LeftText>
+        </NavBarSection>
 
-      <Frame $isExpanded={isExpandedSection}>
-        <TopBar>
-          <div>Chris Murphy</div>
-          <div>software engineer</div>
-        </TopBar>
+        <NavBarSection>
+          <NavigationIsland $isExpanded={isExpandedSection}>
+            <IconContainer>
+              {navItems.map(({ id, icon: Icon }) => (
+                <IconButton
+                  key={id}
+                  $isActive={currentSection === id}
+                  onClick={() => handleNavigation(id)}
+                >
+                  <Icon size={16} />
+                </IconButton>
+              ))}
+            </IconContainer>
+          </NavigationIsland>
+        </NavBarSection>
 
+        <NavBarSection flex={1} align="flex-end">
+          <RightText $hide={isHomePage}>software engineer</RightText>
+        </NavBarSection>
+      </NavBar>
+
+      {/* The "terminal-style" frame behind everything */}
+      <Frame>
         <ContentArea>
-          <ContentWrapper ref={contentRef} $transitioning={isTransitioning}>
-            {children}
+          <ContentWrapper $transitioning={isTransitioning}>
+            {children /* Your actual page content goes here */}
           </ContentWrapper>
+
           <CanvasWrapper>
             <canvas ref={canvasRef} />
           </CanvasWrapper>
