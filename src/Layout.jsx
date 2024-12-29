@@ -1,66 +1,39 @@
-// Layout.jsx
-import React, { useState } from 'react';
+import React, { useState, useRef, useEffect } from 'react';
 import styled from 'styled-components';
-import { Home, User, BookOpen, Briefcase, Send } from 'lucide-react';
+import { Home, BookOpen, Send } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
-const FixedContainer = styled.div`
-  position: fixed;
-  inset: 0;
-  background: ${props => props.theme.colors.background};
-  color: ${props => props.theme.colors.text};
-  padding: 1.5rem;
-`;
-
-const Frame = styled.div`
-  position: relative;
-  width: 100%;
+const Container = styled.div`
   height: 100%;
-  border-radius: 0.75rem;
-  background: rgba(255, 255, 255, 0.05);
-  padding: 1.5rem;
-  display: flex;
-  flex-direction: column;
-`;
-
-const TopBar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 2rem;
-  color: ${props => props.theme.colors.textSecondary};
-`;
-
-const ContentArea = styled.div`
-  position: relative;
-  flex: 1;
-  margin: 1rem 0;
-  border-radius: 0.5rem;
+  width: 100%;
+  background: black;
+  color: white;
   overflow: hidden;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  background-color: ${props => props.theme.colors.backgroundSecondary};
+  position: relative;
 `;
 
-const BottomBar = styled.div`
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  height: 2rem;
-  color: ${props => props.theme.colors.textSecondary};
+const NavigationContainer = styled.div`
+  position: fixed;
+  top: 1%;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 50;
+  transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+
+  @media (orientation: portrait) {
+    top: auto;
+    bottom: 1%;
+  }
 `;
 
 const NavigationIsland = styled.div`
   background: rgba(0, 0, 0, 0.7);
   backdrop-filter: blur(8px);
-  color: white;
   border-radius: 9999px;
   border: 1px solid rgba(255, 255, 255, 0.1);
   transition: all 300ms ease-in-out;
-  z-index: 50;
+  height: 2.5rem;
   width: ${props => props.$isExpanded ? '16rem' : 'auto'};
-  height: ${props => props.$isExpanded ? '8rem' : '3rem'};
   display: flex;
   align-items: center;
   justify-content: center;
@@ -130,104 +103,173 @@ const IconButton = styled.button`
   }
 `;
 
+const Frame = styled.div`
+  width: 100%;
+  min-height: 100vh;
+  display: grid;
+  grid-template-rows: auto 1fr auto;
+  gap: 0.5rem;
+  padding: 0.5rem;
+  transition: all 500ms cubic-bezier(0.4, 0, 0.2, 1);
+  
+  // Terminal screen effect
+  &::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(
+      rgba(255, 255, 255, 0.03) 50%,
+      transparent 50%
+    );
+    background-size: 100% 4px;
+    pointer-events: none;
+    opacity: 0.2;
+  }
+
+  // Frame border effect
+  &::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    pointer-events: none;
+    box-shadow: 
+      inset 0 0 30px rgba(255, 255, 255, 0.02),
+      0 0 10px rgba(0, 0, 0, 0.5);
+  }
+`;
+
+const TopBar = styled.div`
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  height: 2.5rem;
+  padding: 0 1rem;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+  font-family: 'VT323', monospace;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  font-size: 0.875rem;
+  
+  & > div {
+    opacity: 0.7;
+    transition: opacity 0.2s ease;
+    
+    &:hover {
+      opacity: 1;
+    }
+  }
+
+  .title-engineer {
+    @media (max-width: 640px) {
+      display: none;
+    }
+  }
+`;
+
+const ContentArea = styled.div`
+  position: relative;
+  width: 100%;
+  height: 100%;
+  border-radius: 0.25rem;
+  overflow: hidden;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: black;
+  border: 1px solid rgba(255, 255, 255, 0.05);
+`;
+
+const CanvasWrapper = styled.div`
+  position: absolute;
+  inset: 0;
+  canvas {
+    width: 100%;
+    height: 100%;
+  }
+`;
+
+const ContentWrapper = styled.div`
+  position: absolute;
+  inset: 0;
+  transition: opacity 300ms ease-in-out;
+  opacity: ${props => props.$transitioning ? 0 : 1};
+`;
+
 const Layout = ({ children, currentSection }) => {
   const navigate = useNavigate();
-  const [isExpanded, setIsExpanded] = useState(false);
+  const [isTransitioning, setIsTransitioning] = useState(false);
+  const canvasRef = useRef(null);
+  const contentRef = useRef(null);
   const isExpandedSection = currentSection === 'blog';
 
   const navItems = [
     { id: 'home', icon: Home },
-    { id: 'about', icon: User },
-    { id: 'work', icon: Briefcase },
-    { id: 'blog', icon: BookOpen },
-    { id: 'contact', icon: Send }
+    { id: 'contact', icon: Send },
+    { id: 'blog', icon: BookOpen }
   ];
-  
-  const handleNavigation = async (section) => {
-    if (section === currentSection) return;
-    
-    setIsExpanded(true);
-    
-    if (!document.startViewTransition) {
-      navigate(section === 'home' ? '/' : `/${section}`);
-    } else {
-      await document.startViewTransition(() => {
-        navigate(section === 'home' ? '/' : `/${section}`);
-      }).finished;
+
+  useEffect(() => {
+    if (canvasRef.current) {
+      const resizeCanvas = () => {
+        const canvas = canvasRef.current;
+        const rect = canvas.getBoundingClientRect();
+        canvas.width = rect.width * window.devicePixelRatio;
+        canvas.height = rect.height * window.devicePixelRatio;
+      };
+
+      resizeCanvas();
+      window.addEventListener('resize', resizeCanvas);
+      return () => window.removeEventListener('resize', resizeCanvas);
     }
-    
-    setTimeout(() => setIsExpanded(false), 800);
+  }, []);
+
+  const handleNavigation = (section) => {
+    if (section === currentSection) return;
+
+    setIsTransitioning(true);
+    const path = section === 'home' ? '/' : `/${section}`;
+
+    setTimeout(() => {
+      navigate(path);
+      setIsTransitioning(false);
+    }, 300);
   };
 
   return (
-    <FixedContainer>
-      <Frame>
+    <Container>
+      <NavigationContainer $isExpandedSection={isExpandedSection}>
+        <NavigationIsland>
+          <IconContainer>
+            {navItems.map(({ id, icon: Icon }) => (
+              <IconButton
+                key={id}
+                $isActive={currentSection === id}
+                onClick={() => handleNavigation(id)}
+              >
+                <Icon size={16} />
+              </IconButton>
+            ))}
+          </IconContainer>
+        </NavigationIsland>
+      </NavigationContainer>
+
+      <Frame $isExpanded={isExpandedSection}>
         <TopBar>
-          <div>PLACEHOLDER</div>
-          <div className="flex space-x-2">
-          <NavigationIsland $isExpanded={isExpanded}>
-            {isExpanded ? (
-              <div className="text-center">
-                <div className="text-lg font-medium">Navigating...</div>
-                <div className="text-sm opacity-75 mt-2">Please wait</div>
-              </div>
-            ) : (
-              <IconContainer>
-                {navItems.map(({ id, icon: Icon }) => (
-                  <IconButton
-                    key={id}
-                    $isActive={currentSection === id}
-                    onClick={() => handleNavigation(id)}
-                  >
-                    <Icon size={16} />
-                  </IconButton>
-                ))}
-              </IconContainer>
-            )}
-          </NavigationIsland>
-          </div>
-          <div>Entropy |1417|</div>
+          <div>Chris Murphy</div>
+          <div>software engineer</div>
         </TopBar>
 
         <ContentArea>
-          <div 
-            className={`
-              absolute inset-0
-              transition-transform duration-500 transform-gpu
-              ${isExpandedSection ? 'scale-[5]' : 'scale-100'}
-            `}
-            style={{ viewTransitionName: 'canvas-content' }}
-          >
+          <ContentWrapper ref={contentRef} $transitioning={isTransitioning}>
             {children}
-          </div>
+          </ContentWrapper>
+          <CanvasWrapper>
+            <canvas ref={canvasRef} />
+          </CanvasWrapper>
         </ContentArea>
-
-        <BottomBar>
-          <div>N ⦗ 30.3232°</div>
-          <div>81.5650° ⦘ W</div>
-        </BottomBar>
       </Frame>
-
-      <style>{`
-        @keyframes zoom-in {
-          from { transform: scale(1); }
-          to { transform: scale(5); }
-        }
-
-        @keyframes zoom-out {
-          from { transform: scale(5); }
-          to { transform: scale(1); }
-        }
-
-        ::view-transition-old(canvas-content) {
-          animation: 500ms cubic-bezier(0.4, 0, 0.2, 1) both zoom-out;
-        }
-
-        ::view-transition-new(canvas-content) {
-          animation: 500ms cubic-bezier(0.4, 0, 0.2, 1) both zoom-in;
-        }
-      `}</style>
-    </FixedContainer>
+    </Container>
   );
 };
 
