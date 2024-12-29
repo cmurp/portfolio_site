@@ -4,35 +4,35 @@ const theme: ThemeInterface = {
     borderRadius: '5px',
 
     colors: {
-        main: 'oklch(0% 0 0)', // black - primary background color
-        secondary: 'oklch(23.5% 0.046 244.24)', // Medium blue - secondary background color for panels, modals
-        tertiary: 'oklch(38.74% 0.036 241.23)', // Light blue - used for backgrounds of selected items, hover states
+        main: 'rgb(0, 0, 0)', // black - primary background color
+        secondary: 'rgb(0, 51, 102)', // Medium blue - secondary background color for panels, modals
+        tertiary: 'rgb(51, 102, 153)', // Light blue - used for backgrounds of selected items, hover states
 
-        accent: 'oklch(77.52% 0.16272623898676697 76.16781831368107)', // Gold - accent color for buttons, links
-        secondaryAccent: 'oklch(100% 0 0)', // White - secondary accent color for highlights, notifications
+        accent: 'rgb(255, 215, 0)', // Gold - accent color for buttons, links
+        secondaryAccent: 'rgb(255, 255, 255)', // White - secondary accent color for highlights, notifications
 
-        textPrimary: 'oklch(98.34% 0.004 236.5)', // Almost white - primary text color
-        textSecondary: 'oklch(92.88% 0.013 255.51)', // Light gray - secondary text color for less important information
-        textOnAccent: 'oklch(20.07% 0.03 263.54)', // Dark blue - text color on accent backgrounds
-        textOnSecondaryAccent: 'oklch(20.07% 0.03 263.54)', // Dark blue - text color on secondary accent backgrounds
+        textPrimary: 'rgb(250, 250, 250)', // Almost white - primary text color
+        textSecondary: 'rgb(235, 235, 235)', // Light gray - secondary text color for less important information
+        textOnAccent: 'rgb(51, 51, 102)', // Dark blue - text color on accent backgrounds
+        textOnSecondaryAccent: 'rgb(51, 51, 102)', // Dark blue - text color on secondary accent backgrounds
 
-        border: 'oklch(38.74% 0.036 241.23)', // Light blue - border color for dividers, tables, etc
-        borderAccent: 'oklch(77.52% 0.16272623898676697 76.16781831368107)', // Gold - border color for emphasis
+        border: 'rgb(51, 102, 153)', // Light blue - border color for dividers, tables, etc
+        borderAccent: 'rgb(255, 215, 0)', // Gold - border color for emphasis
 
         success: 'teal', // Green - success color for notifications, alerts
-        warning: 'oklch(74.42% 0.181 56.46)', // Orange - warning color for notifications, alerts
-        error: 'oklch(53.08% 0.2177996666501933 29.23388519234262)', // Red - error color for notifications, alerts
-        info: 'oklch(65.82% 0.169 248.81)', // Blue - info color for notifications, alerts
+        warning: 'rgb(255, 165, 0)', // Orange - warning color for notifications, alerts
+        error: 'rgb(255, 0, 0)', // Red - error color for notifications, alerts
+        info: 'rgb(0, 0, 255)', // Blue - info color for notifications, alerts
 
         background: 'black', // Almost white - background color for the page
-        backgroundSecondary: 'oklch(92.88% 0.013 255.51)', // Light gray - secondary background color for panels, modals
+        backgroundSecondary: 'rgb(235, 235, 235)', // Light gray - secondary background color for panels, modals
 
-        title: 'oklch(77.52% 0.16272623898676697 76.16781831368107)', // Gold - color for titles, headings, etc
+        title: 'rgb(255, 215, 0)', // Gold - color for titles, headings, etc
     },
 
     fonts: {
-        primary:  'VT323, monospace', /* This is a Google Font similar to old terminal fonts */
-        code: 'system-ui, consolas, monospace', // Font for code blocks, data presentation
+        primary:  'consolas, monospace', /* This is a Google Font similar to old terminal fonts */
+        code: 'consolas, monospace', // Font for code blocks, data presentation
     },
 
     fontSizes: {

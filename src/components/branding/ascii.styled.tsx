@@ -23,10 +23,10 @@ const TextDisplay = styled.div<AsciiProps>`
 `;
 
 const Pre = styled.pre`
-    font-size: .55vw; 
+    font-size: .2rem; 
     color: white;
     white-space: pre;
-    line-height: .6vw;
+    line-height: .2rem;
     font-family: 'VT323', monospace;
 `
 
