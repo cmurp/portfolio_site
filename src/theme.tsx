@@ -1,6 +1,6 @@
-import { ThemeInterface } from 'styled-components';
+import { DefaultTheme } from 'styled-components';
 
-const theme: ThemeInterface = {
+const theme: DefaultTheme = {
     borderRadius: '5px',
 
     colors: {
