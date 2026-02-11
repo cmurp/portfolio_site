@@ -251,9 +251,9 @@ const Layout = ({ children, currentSection }) => {
   const isHomePage = currentSection === 'home';
 
   const navItems = [
-    { id: 'home', icon: Home },
-    { id: 'contact', icon: Send },
-    { id: 'blog', icon: BookOpen }
+    { id: 'home', icon: Home, label: 'Home' },
+    { id: 'contact', icon: Send, label: 'Contact' },
+    { id: 'blog', icon: BookOpen, label: 'Blog' }
   ];
 
   useEffect(() => {
@@ -293,11 +293,13 @@ const Layout = ({ children, currentSection }) => {
         <NavBarSection>
           <NavigationIsland $isExpanded={isExpandedSection}>
             <IconContainer>
-              {navItems.map(({ id, icon: Icon }) => (
+              {navItems.map(({ id, icon: Icon, label }) => (
                 <IconButton
                   key={id}
                   $isActive={currentSection === id}
                   onClick={() => handleNavigation(id)}
+                  aria-label={label}
+                  title={label}
                 >
                   <Icon size={16} />
                 </IconButton>

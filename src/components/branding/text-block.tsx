@@ -1,5 +1,5 @@
 import React from "react";
-import styled, { useTheme, ThemeInterface } from "styled-components";
+import styled, { useTheme } from "styled-components";
 
 
 interface Props {
