@@ -3,6 +3,26 @@ import styled from 'styled-components';
 import { Home, BookOpen, Send } from 'lucide-react';
 import { useNavigate } from 'react-router';
 
+const SkipLink = styled.a`
+  position: absolute;
+  top: -100px;
+  left: 50%;
+  transform: translateX(-50%);
+  background: ${({ theme }) => theme?.colors?.accent || '#FFD700'};
+  color: ${({ theme }) => theme?.colors?.textOnAccent || '#000'};
+  padding: 0.5rem 1rem;
+  z-index: 9999;
+  transition: top 0.3s;
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 0 0 4px 4px;
+
+  &:focus {
+    top: 0;
+    outline: 2px solid white;
+  }
+`;
+
 //
 // 1) Force container to be full viewport in both directions
 //    so that absolute-positioned children know their reference size.
@@ -284,6 +304,7 @@ const Layout = ({ children, currentSection }) => {
 
   return (
     <Container>
+      <SkipLink href="#main-content">Skip to content</SkipLink>
       {/* NavBar: fixed top (landscape) or bottom (portrait) */}
       <NavBar>
         <NavBarSection flex={1} align="flex-start">
@@ -316,7 +337,7 @@ const Layout = ({ children, currentSection }) => {
       {/* The "terminal-style" frame behind everything */}
       <Frame>
         <ContentArea>
-          <ContentWrapper $transitioning={isTransitioning}>
+          <ContentWrapper id="main-content" tabIndex="-1" $transitioning={isTransitioning}>
             {children /* Your actual page content goes here */}
           </ContentWrapper>
 
