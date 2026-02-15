@@ -1,4 +1,3 @@
-import { Form } from "react-router-dom";
 import styled from "styled-components";
 import { CiTwitter, CiLinkedin } from "react-icons/ci";
 import { DiGithubAlt } from "react-icons/di";
@@ -110,11 +109,12 @@ const IconLink = styled.a`
   }
 `;
 
-const Email = styled.div`
+const Email = styled.a`
   color: rgba(255, 255, 255, 0.7);
   margin: 0.25rem 0;
   font-size: 0.875rem;
   text-align: center;
+  text-decoration: none;
 
   &:hover {
     color: rgba(255, 255, 255, 1);
@@ -131,18 +131,35 @@ export default function Contact() {
         </Header>
 
         <ContactInfo>
-          <IconLink href="https://github.com/cmurp">
+          <IconLink
+            href="https://github.com/cmurp"
+            aria-label="GitHub Profile"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <DiGithubAlt />
           </IconLink>
-          <IconLink href="https://www.linkedin.com/in/chris-murphy-50912b122/">
+          <IconLink
+            href="https://www.linkedin.com/in/chris-murphy-50912b122/"
+            aria-label="LinkedIn Profile"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <CiLinkedin />
           </IconLink>
-          <IconLink href="https://twitter.com/__ChrisMurphy__">
+          <IconLink
+            href="https://twitter.com/__ChrisMurphy__"
+            aria-label="Twitter Profile"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <CiTwitter />
           </IconLink>
         </ContactInfo>
 
-        <Email>chrismurphy@hey.com</Email>
+        <Email href="mailto:chrismurphy@hey.com" aria-label="Email Chris Murphy">
+          chrismurphy@hey.com
+        </Email>
       </BusinessCard>
     </Container>
   );
