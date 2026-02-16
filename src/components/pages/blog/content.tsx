@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React from "react";
 import styled, { useTheme } from "styled-components";
 
 import { useButtonClickedContext } from "./context/buttonClicked";
@@ -22,7 +22,7 @@ const ContentContainer = styled.div<ContainerProps>`
 `;
 
 const Content: React.FC<Props> = ({ children }) => {
-  const { isClicked, setIsClicked } = useButtonClickedContext();
+  const { isClicked } = useButtonClickedContext();
   const theme = useTheme();
 
   return (
