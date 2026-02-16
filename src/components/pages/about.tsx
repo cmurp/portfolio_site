@@ -42,11 +42,11 @@ const StyledLink = styled.a`
     }
 `;
 
-const BoldSpan = styled.span`
+/* const BoldSpan = styled.span`
     font-weight: bold;
     color: transparent;
     -webkit-text-stroke: .5px ${(props: any) => props.theme.colors.accent};
-`;
+`; */
 
 const Location = styled.div`
     display: flex;

@@ -14,14 +14,14 @@ const spin = keyframes`
   }
 `;
 
-const spin3D = keyframes`
+/* const spin3D = keyframes`
   from {
     transform: rotate3d(0.5, 0.5, 0.5, 0deg);
   }
   to {
     transform: rotate3d(0.5, 0.5, 0.5, 360deg);
   }
-`;
+`; */
 
 /* =====================  SOLAR SYSTEM  ===================== */
 const SpinnerBox = styled.div`

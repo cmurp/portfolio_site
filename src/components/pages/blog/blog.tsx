@@ -1,5 +1,4 @@
-import React, { Ref, useEffect } from 'react';
-import styled from 'styled-components';
+import React, { useEffect } from 'react';
 
 import Content from './content';
 import { ButtonClickedContext } from './context/buttonClicked';
@@ -12,7 +11,7 @@ interface Props {
 const Blog: React.FC<Props> = ({ children }) => {
   const [isClicked, setIsClicked] = React.useState<boolean>(false);
 
-  const clickToRender = useEffect(() => {
+  useEffect(() => {
         window.addEventListener('keydown', (key) => {
           if (key.key === 'Enter')
             setIsClicked(true);
