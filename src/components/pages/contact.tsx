@@ -95,12 +95,13 @@ const IconLink = styled.a`
   transition: all 200ms ease-in-out;
   text-decoration: none;
 
-  &:hover {
+  &:hover, &:focus-visible {
     color: white;
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    outline: none;
   }
 
   svg {
@@ -110,14 +111,18 @@ const IconLink = styled.a`
   }
 `;
 
-const Email = styled.div`
+const Email = styled.a`
   color: rgba(255, 255, 255, 0.7);
   margin: 0.25rem 0;
   font-size: 0.875rem;
   text-align: center;
+  text-decoration: none;
+  transition: all 200ms ease-in-out;
 
-  &:hover {
+  &:hover, &:focus-visible {
     color: rgba(255, 255, 255, 1);
+    outline: 1px dashed rgba(255, 255, 255, 0.5);
+    outline-offset: 4px;
   }
 `;
 
@@ -131,18 +136,38 @@ export default function Contact() {
         </Header>
 
         <ContactInfo>
-          <IconLink href="https://github.com/cmurp">
+          <IconLink
+            href="https://github.com/cmurp"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+            title="GitHub"
+          >
             <DiGithubAlt />
           </IconLink>
-          <IconLink href="https://www.linkedin.com/in/chris-murphy-50912b122/">
+          <IconLink
+            href="https://www.linkedin.com/in/chris-murphy-50912b122/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+            title="LinkedIn"
+          >
             <CiLinkedin />
           </IconLink>
-          <IconLink href="https://twitter.com/__ChrisMurphy__">
+          <IconLink
+            href="https://twitter.com/__ChrisMurphy__"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter Profile"
+            title="Twitter"
+          >
             <CiTwitter />
           </IconLink>
         </ContactInfo>
 
-        <Email>chrismurphy@hey.com</Email>
+        <Email href="mailto:chrismurphy@hey.com" aria-label="Send email to chrismurphy@hey.com">
+          chrismurphy@hey.com
+        </Email>
       </BusinessCard>
     </Container>
   );
