@@ -224,6 +224,7 @@ const ContentArea = styled.div`
 const CanvasWrapper = styled.div`
   position: absolute;
   inset: 0;
+  pointer-events: none;
   canvas {
     width: 100%;
     height: 100%;
