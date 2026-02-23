@@ -131,13 +131,28 @@ export default function Contact() {
         </Header>
 
         <ContactInfo>
-          <IconLink href="https://github.com/cmurp">
+          <IconLink
+            href="https://github.com/cmurp"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="GitHub Profile"
+          >
             <DiGithubAlt />
           </IconLink>
-          <IconLink href="https://www.linkedin.com/in/chris-murphy-50912b122/">
+          <IconLink
+            href="https://www.linkedin.com/in/chris-murphy-50912b122/"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="LinkedIn Profile"
+          >
             <CiLinkedin />
           </IconLink>
-          <IconLink href="https://twitter.com/__ChrisMurphy__">
+          <IconLink
+            href="https://twitter.com/__ChrisMurphy__"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Twitter Profile"
+          >
             <CiTwitter />
           </IconLink>
         </ContactInfo>
