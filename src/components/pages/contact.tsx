@@ -109,7 +109,7 @@ const IconLink = styled.a`
   }
 `;
 
-const Email = styled.div`
+const Email = styled.a`
   color: rgba(255, 255, 255, 0.7);
   margin: 0.25rem 0;
   font-size: 0.875rem;
@@ -133,31 +133,31 @@ export default function Contact() {
         <ContactInfo>
           <IconLink
             href="https://github.com/cmurp"
+            aria-label="GitHub Profile"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="GitHub Profile"
           >
             <DiGithubAlt />
           </IconLink>
           <IconLink
             href="https://www.linkedin.com/in/chris-murphy-50912b122/"
+            aria-label="LinkedIn Profile"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="LinkedIn Profile"
           >
             <CiLinkedin />
           </IconLink>
           <IconLink
             href="https://twitter.com/__ChrisMurphy__"
+            aria-label="Twitter Profile"
             target="_blank"
             rel="noopener noreferrer"
-            aria-label="Twitter Profile"
           >
             <CiTwitter />
           </IconLink>
         </ContactInfo>
 
-        <Email as="a" href="mailto:chrismurphy@hey.com" aria-label="Email Chris Murphy">
+        <Email href="mailto:chrismurphy@hey.com" aria-label="Email Chris Murphy">
           chrismurphy@hey.com
         </Email>
       </BusinessCard>

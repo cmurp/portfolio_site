@@ -299,6 +299,7 @@ const Layout = ({ children, currentSection }) => {
                   $isActive={currentSection === id}
                   onClick={() => handleNavigation(id)}
                   aria-label={label}
+                  aria-current={currentSection === id ? 'page' : undefined}
                   title={label}
                 >
                   <Icon size={16} />
