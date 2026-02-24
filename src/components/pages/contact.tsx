@@ -1,4 +1,3 @@
-import { Form } from "react-router-dom";
 import styled from "styled-components";
 import { CiTwitter, CiLinkedin } from "react-icons/ci";
 import { DiGithubAlt } from "react-icons/di";
@@ -131,13 +130,28 @@ export default function Contact() {
         </Header>
 
         <ContactInfo>
-          <IconLink href="https://github.com/cmurp">
+          <IconLink
+            href="https://github.com/cmurp"
+            aria-label="GitHub"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <DiGithubAlt />
           </IconLink>
-          <IconLink href="https://www.linkedin.com/in/chris-murphy-50912b122/">
+          <IconLink
+            href="https://www.linkedin.com/in/chris-murphy-50912b122/"
+            aria-label="LinkedIn"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <CiLinkedin />
           </IconLink>
-          <IconLink href="https://twitter.com/__ChrisMurphy__">
+          <IconLink
+            href="https://twitter.com/__ChrisMurphy__"
+            aria-label="Twitter"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
             <CiTwitter />
           </IconLink>
         </ContactInfo>
