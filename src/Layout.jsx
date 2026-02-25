@@ -151,6 +151,12 @@ const IconButton = styled.button`
     }
   }
 
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px ${(props) => props.theme.colors.accent};
+    background: rgba(255, 255, 255, 0.15);
+  }
+
   svg {
     width: 14px;
     height: 14px;
