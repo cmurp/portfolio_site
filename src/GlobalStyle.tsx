@@ -72,4 +72,12 @@ export const GlobalStyle = createGlobalStyle`
     code {
         font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
     }
+
+    /*
+      Add accessible focus indicators
+    */
+    :focus-visible {
+        outline: 2px solid ${({ theme }) => theme.colors.accent};
+        outline-offset: 2px;
+    }
 `
