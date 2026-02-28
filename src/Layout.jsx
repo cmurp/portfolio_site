@@ -151,6 +151,11 @@ const IconButton = styled.button`
     }
   }
 
+  &:focus-visible {
+    outline: 2px solid ${({ theme }) => theme.colors.accent};
+    outline-offset: 2px;
+  }
+
   svg {
     width: 14px;
     height: 14px;
