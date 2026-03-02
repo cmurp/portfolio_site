@@ -56,6 +56,14 @@ export const GlobalStyle = createGlobalStyle`
     }
 
     /*
+    7.5. Add accessible focus indicators for keyboard navigation
+    */
+    a:focus-visible, button:focus-visible, input:focus-visible, textarea:focus-visible, select:focus-visible {
+        outline: 2px solid ${({ theme }) => theme.colors.accent};
+        outline-offset: 2px;
+    }
+
+    /*
     8. Avoid text overflows
     */
     p, h1, h2, h3, h4, h5, h6 {
