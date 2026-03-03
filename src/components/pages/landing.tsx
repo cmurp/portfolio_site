@@ -129,7 +129,7 @@ const ContentWrapper = styled.div`
  * and we’ll add a dynamic style prop for the 3D tilt.
  */
 interface MainContentProps {
-  transformStyle: string;
+  $transformStyle: string;
 }
 const MainContent = styled.div<MainContentProps>`
   position: relative;
@@ -141,7 +141,7 @@ const MainContent = styled.div<MainContentProps>`
   transition: transform 0.1s ease-out;
 
   /* We'll inject our tilt transform here. */
-  transform: ${(props) => props.transformStyle};
+  transform: ${(props) => props.$transformStyle};
 `;
 
 const AlignmentContainer = styled.div`
@@ -370,7 +370,7 @@ const Landing: React.FC = () => {
           We apply our dynamic 3D transform style to MainContent
           via the transformStyle state.
         */}
-        <MainContent transformStyle={transformStyle}>
+        <MainContent $transformStyle={transformStyle}>
           <AlignmentContainer>
             <SolarSystemComponent />
             <AsciiContainer>
