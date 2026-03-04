@@ -94,12 +94,13 @@ const IconLink = styled.a`
   transition: all 200ms ease-in-out;
   text-decoration: none;
 
-  &:hover {
+  &:hover, &:focus-visible {
     color: white;
     background: rgba(255, 255, 255, 0.15);
     border-color: rgba(255, 255, 255, 0.3);
     transform: scale(1.05);
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
+    outline: none;
   }
 
   svg {
@@ -116,8 +117,10 @@ const Email = styled.a`
   text-align: center;
   text-decoration: none;
 
-  &:hover {
+  &:hover, &:focus-visible {
     color: rgba(255, 255, 255, 1);
+    outline: 1px dashed rgba(255, 255, 255, 0.5);
+    outline-offset: 4px;
   }
 `;
 
