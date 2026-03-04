@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, useCallback } from "react";
 import styled, { keyframes } from "styled-components";
 
 import Text from "../branding/text-block";
@@ -34,12 +34,12 @@ export const TypingEffect: React.FC<TypingEffectProps> = ({ text, isClicked, spe
   const [currentIndex, setCurrentIndex] = React.useState(0);
   const [showTypingIndicator, setShowTypingIndicator] = React.useState(true);
 
-  const handleTyping = () => {
+  const handleTyping = useCallback(() => {
     if (currentIndex < text.length) {
       setDisplayText((prevText) => prevText + text[currentIndex]);
       setCurrentIndex((prevIndex) => prevIndex + 1);
     }
-  };
+  }, [currentIndex, text]);
 
   useEffect(() => {
     if (isClicked) {
@@ -57,7 +57,7 @@ export const TypingEffect: React.FC<TypingEffectProps> = ({ text, isClicked, spe
         clearInterval(typingInterval);
       };
     }
-  }, [currentIndex, isClicked, text]);
+  }, [currentIndex, isClicked, text, handleTyping, speed]);
 
   useEffect(() => {
     if (displayText.length === text.length) {

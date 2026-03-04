@@ -1,6 +1,6 @@
 import { useState, useMemo } from "react";
-import { createBrowserRouter, useLocation, Outlet, useNavigate, RouterProvider } from 'react-router-dom';
-import { styled, ThemeProvider } from 'styled-components';
+import { createBrowserRouter, useLocation, Outlet, RouterProvider } from 'react-router-dom';
+import { ThemeProvider } from 'styled-components';
 
 import { GlobalStyle } from './GlobalStyle';
 import theme from './theme';
@@ -13,7 +13,7 @@ import Blog from './components/pages/blog/blog';
 import Landing from './components/pages/landing';
 import { NavigationActivatedContext } from "./context/NavigationActivatedContext";
 import Layout from "./Layout";
-import CustomCursor from "./components/effects/CustomCursor";
+// import CustomCursor from "./components/effects/CustomCursor";
 import NotFoundPage from "./components/pages/notFoundPage";
 import Work from "./components/pages/works/work";
 
