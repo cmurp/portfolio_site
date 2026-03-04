@@ -72,4 +72,14 @@ export const GlobalStyle = createGlobalStyle`
     code {
         font-family: source-code-pro, Menlo, Monaco, Consolas, 'Courier New', monospace;
     }
+
+    /* Ensure accessible focus styles for keyboard navigation */
+    :focus:not(:focus-visible) {
+        outline: none;
+    }
+
+    :focus-visible {
+        outline: 2px solid ${({ theme }) => theme.colors.accent};
+        outline-offset: 2px;
+    }
 `
