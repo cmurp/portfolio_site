@@ -1,3 +1,3 @@
-## 2025-05-22 - Icon Links Accessibility
-**Learning:** Icon-only links (using `react-icons`) are common in this app but lack `aria-label` or accessible text, making them invisible to screen readers.
-**Action:** Always add `aria-label` to any `IconLink` or icon-only button to ensure screen reader accessibility.
+## 2026-02-14 - Navigation Current Page Indication
+**Learning:** Screen readers announce navigation links but do not automatically indicate which one is currently active unless `aria-current="page"` is used. Visual cues (like color) are insufficient for non-sighted users.
+**Action:** Ensure all active navigation links in SPA layouts have `aria-current="page"` dynamically applied.

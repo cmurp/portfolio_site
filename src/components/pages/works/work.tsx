@@ -1,12 +1,6 @@
-import React, { useEffect, useRef, useState } from "react";
+import React, { useEffect, useState } from "react";
 import styled from "styled-components";
-import { Link } from "react-router-dom";
-import { DiGithubAlt } from "react-icons/di";
-import TextBlock from "../../branding/text-block";
-import DisintegrateText from "../../effects/disentegrate-text";
 import { Flipper, Flipped } from 'react-flip-toolkit';
-import { CiSquareRemove, CiSquarePlus
- } from "react-icons/ci";
 
 
 const Container = styled.div`
@@ -71,9 +65,9 @@ const FilterTag = styled.button<{ active?: boolean, color?: string }>`
   }
 `;
 
-const FilterCount = styled.span`
+/* const FilterCount = styled.span`
 
-`
+` */
 
 
 const Title = styled.h2`
@@ -110,7 +104,7 @@ const Tag = styled.span<{ active?: boolean, color?: string }>`
 `;
 
 // interface for json data
-interface Work {
+interface WorkItem {
   text: string;
   tags: string[];
 }
@@ -120,7 +114,7 @@ interface Tags {
 }
 
 interface WorksData {
-  works: Work[];
+  works: WorkItem[];
   tags: Tags;
 }
 
@@ -138,7 +132,7 @@ export default function Work() {
               setTagColors(jsonData.tags);
 
               const allTags = new Set<string>();
-              jsonData.works.forEach((work: Work) => {
+              jsonData.works.forEach((work: WorkItem) => {
                   work.tags.forEach(tag => allTags.add(tag));
               });
 

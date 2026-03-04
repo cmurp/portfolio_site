@@ -1,4 +1,3 @@
-import { useRouteError } from "react-router-dom";
 import styled from "styled-components";
 import { Player, Controls } from '@lottiefiles/react-lottie-player';
 import { Link } from "react-router-dom";
