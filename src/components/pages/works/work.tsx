@@ -155,7 +155,7 @@ export default function Work() {
       }));
   };
 
-  if (!works) return <p>Loading...</p>;
+  if (!works) return <p role="status" aria-live="polite">Loading...</p>;
 
   return (
     <Container>
@@ -168,6 +168,7 @@ export default function Work() {
               <Flipped key={tag} flipId={tag}>
                 <FilterTag
                   active={active} // active is boolean
+                  aria-pressed={active} // For screen readers
                   color={tagColors[tag] as string} // Cast color as string to ensure type safety
                   onClick={() => toggleFilter(tag)}
                 >
