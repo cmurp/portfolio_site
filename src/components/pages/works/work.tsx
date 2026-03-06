@@ -155,7 +155,7 @@ export default function Work() {
       }));
   };
 
-  if (!works) return <p>Loading...</p>;
+  if (!works) return <p role="status" aria-live="polite">Loading...</p>;
 
   return (
     <Container>
@@ -170,6 +170,7 @@ export default function Work() {
                   active={active} // active is boolean
                   color={tagColors[tag] as string} // Cast color as string to ensure type safety
                   onClick={() => toggleFilter(tag)}
+                  aria-pressed={active}
                 >
                   {tag}
                 </FilterTag>
