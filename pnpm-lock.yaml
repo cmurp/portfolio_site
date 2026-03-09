@@ -108,6 +108,9 @@ importers:
       '@babel/plugin-proposal-private-property-in-object':
         specifier: ^7.21.11
         version: 7.21.11(@babel/core@7.29.0)
+      '@types/testing-library__jest-dom':
+        specifier: ^5.14.9
+        version: 5.14.9
       '@wixc3/react-board':
         specifier: ^2.3.0
         version: 2.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
