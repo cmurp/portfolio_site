@@ -63,6 +63,13 @@ const FilterTag = styled.button<{ active?: boolean, color?: string }>`
       props.active ? props.theme.colors.tertiary : props.theme.colors.main
     };
   }
+
+  &:focus-visible {
+    outline: none;
+    box-shadow: 0 0 0 2px ${({ theme }) => theme.colors.accent};
+    position: relative;
+    z-index: 1;
+  }
 `;
 
 /* const FilterCount = styled.span`
