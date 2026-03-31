@@ -102,6 +102,11 @@ const IconLink = styled.a`
     box-shadow: 0 0 10px rgba(255, 255, 255, 0.2);
   }
 
+  &:focus-visible {
+    outline: 2px solid rgb(255, 215, 0);
+    outline-offset: 2px;
+  }
+
   svg {
     width: 16px;
     height: 16px;
@@ -118,6 +123,11 @@ const Email = styled.a`
 
   &:hover {
     color: rgba(255, 255, 255, 1);
+  }
+
+  &:focus-visible {
+    outline: 2px solid rgb(255, 215, 0);
+    outline-offset: 2px;
   }
 `;
 

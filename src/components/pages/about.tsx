@@ -40,6 +40,10 @@ const StyledLink = styled.a`
         color: ${(props: any) => props.theme.colors.textPrimary};
         background-color: ${(props: any) => props.theme.colors.accent};
     }
+    &:focus-visible {
+        outline: 2px solid ${(props: any) => props.theme.colors.accent};
+        outline-offset: 2px;
+    }
 `;
 
 /* const BoldSpan = styled.span`
