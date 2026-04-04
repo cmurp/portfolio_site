@@ -32,9 +32,6 @@ importers:
       '@testing-library/user-event':
         specifier: ^13.5.0
         version: 13.5.0(@testing-library/dom@8.20.1)
-      '@types/jest':
-        specifier: ^27.5.2
-        version: 27.5.2
       '@types/node':
         specifier: ^16.18.28
         version: 16.18.126
@@ -108,6 +105,9 @@ importers:
       '@babel/plugin-proposal-private-property-in-object':
         specifier: ^7.21.11
         version: 7.21.11(@babel/core@7.29.0)
+      '@types/jest':
+        specifier: ^27.5.2
+        version: 27.5.2
       '@wixc3/react-board':
         specifier: ^2.3.0
         version: 2.6.0(react-dom@18.3.1(react@18.3.1))(react@18.3.1)

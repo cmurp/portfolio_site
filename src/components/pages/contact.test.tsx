@@ -1,5 +1,6 @@
 import React from 'react';
 import { render, screen } from '@testing-library/react';
+import '@testing-library/jest-dom';
 import { ThemeProvider } from 'styled-components';
 import Contact from './contact';
 import theme from '../../theme';
